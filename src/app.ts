@@ -1,7 +1,8 @@
 import express, {Application} from 'express';
 
 const  app: Application = express();
-//hello
+//hello where are your from?
+//peru and you?
 //ola
 
 //conectar a la bd
