@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model pais {
+  id_pais            Int       @id @default(autoincrement())
+  nombre             String    @db.VarChar(100)
+  estado             String    @default(dbgenerated("1")) @db.Char(1)
+  fecha_creacion     DateTime  @default(now()) @db.Timestamp(6)
+  fecha_modificacion DateTime? @db.Timestamp(6)
+}
+
+model roles {
+  id_rol             Int       @id @default(autoincrement())
+  nombre             String    @db.VarChar(100)
+  estado             String    @default(dbgenerated("1")) @db.Char(1)
+  fecha_creacion     DateTime  @default(now()) @db.Timestamp(6)
+  fecha_modificacion DateTime? @db.Timestamp(6)
+}

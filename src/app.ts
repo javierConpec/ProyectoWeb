@@ -1,15 +1,18 @@
-import express, {Application} from 'express';
+/**
+ * CONFIGURAR RUTAS Y CONEXION BD, ENTRE OTRAS COSAS DEL SERVICIO
+ */
 
-const  app: Application = express();
-//hello where are your from?
-//peru and you?
-//very nice!!
-//ola
+import express, { Application } from 'express';
+import rolesRoutes from './routes/rolRoutes';
 
-//conectar a la bd
+const app: Application = express();
 
-//midelwares
+//Database
 
-//routes
+//Midlewares
+app.use(express.json());
+
+//Routes
+app.use('/api/v1.0/roles',rolesRoutes);
 
 export default app;
