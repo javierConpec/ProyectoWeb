@@ -12,6 +12,7 @@ export const insertarRol = async (rol: IRol) => {
     return RESPONSE_INSERT_OK;
 }
 
+
 export const listarRoles = async () => {
     const rol: roles[] = await prisma.roles.findMany();
     return rol.map((rol: roles)=> fromPrismaRol(rol));

@@ -36,7 +36,7 @@ exports.eliminarRol = exports.modificarRol = exports.obtenerRol = exports.listar
 const rolService = __importStar(require("../services/rolService"));
 const ResponseModel_1 = require("../models/ResponseModel");
 const insertarRol = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('rolController::insertarAlumno');
+    console.log('rolController::insertarrol');
     try {
         const response = yield rolService.insertarRol(req.body);
         res.status(200).json(ResponseModel_1.ResponseModel.success(null, response));
