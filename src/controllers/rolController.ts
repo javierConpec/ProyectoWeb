@@ -35,8 +35,7 @@ export const obtenerRol = async (req: Request, res: Response) => {
     } catch (error) {
         console.error(error.message)
         res.status(500).json(ResponseModel.error(error.message));
-    }
-    
+    } 
 }
 
 export const modificarRol = async (req: Request, res: Response) => {

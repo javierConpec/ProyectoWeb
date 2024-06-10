@@ -1,7 +1,6 @@
 import { Request,Response } from "express";
 import * as paisService from "../services/paisService";
 import { ResponseModel } from "../models/ResponseModel";
-import { json } from "stream/consumers";
 
 export const insertarPais = async (req: Request, res: Response)=>{
     console.log('paisController::insertarPais');
@@ -24,6 +23,7 @@ export const listarPaises = async (req: Request, res: Response)=>{
         res.status(500).json(ResponseModel.error(error.message));
     }
 }
+
 export const obtenerPais = async (req:Request, res:Response) => {
     console.log('paisController::obtenerPais');
     try{
@@ -57,6 +57,5 @@ export const eliminarPais = async(req:Request, res:Response)=>{
     }catch(error){
         console.error(error.message)
         res.status(500).json(ResponseModel.error(error.message));
-    }
-    
+    }  
 }

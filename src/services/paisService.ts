@@ -1,8 +1,7 @@
 import { PrismaClient, pais } from "@prisma/client";
-import { IPais } from "../models/paisModel";
+import { IPais } from "../models/Pais";
 import { RESPONSE_INSERT_OK, RESPONSE_UPDATE_OK,RESPONSE_DELETE_OK } from "../shared/constants";
 import { fromPrismaPais, toPrismaPais } from "../mappers/paisMapper";
-import { log } from "console";
 
 const prisma = new PrismaClient();
 
@@ -26,9 +25,7 @@ export const ObtenerPais = async (idPais:number)=>{
             id_pais: idPais
         }
     });
-    return fromPrismaPais(pais)
-
-   
+    return fromPrismaPais(pais)   
 }
 
 export const modificarPais = async (idPais: number, pais:IPais)=>{
