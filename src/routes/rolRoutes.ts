@@ -8,5 +8,5 @@ router.get('/',listarRoles);
 router.get('/:id',obtenerRol);
 router.put('/:id',modificarRol);
 router.delete('/:id',eliminarRol);
-
+//prueba
 export default router;
