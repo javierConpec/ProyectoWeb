@@ -7,18 +7,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model pais {
-  id_pais            Int       @id @default(autoincrement())
+model roles {
+  id_rol             Int       @id @default(autoincrement())
   nombre             String    @db.VarChar(100)
-  estado             String    @default(dbgenerated("1")) @db.Char(1)
+  estado_auditoria   String    @default(dbgenerated("1")) @db.Char(1)
   fecha_creacion     DateTime  @default(now()) @db.Timestamp(6)
   fecha_modificacion DateTime? @db.Timestamp(6)
 }
 
-model roles {
-  id_rol             Int       @id @default(autoincrement())
+model paquetes {
+  id_paquete         Int       @id @default(autoincrement())
   nombre             String    @db.VarChar(100)
-  estado             String    @default(dbgenerated("1")) @db.Char(1)
+  descripcion        String?   @db.VarChar(100)
+  estado_auditoria   String    @default(dbgenerated("1")) @db.Char(1)
+  fecha_creacion     DateTime  @default(now()) @db.Timestamp(6)
+  fecha_modificacion DateTime? @db.Timestamp(6)
+}
+
+model categorias {
+  id_categoria       Int       @id(map: "categoria_pkey") @default(autoincrement())
+  nombre             String    @db.VarChar(100)
+  descripcion        String?   @db.VarChar(100)
+  estado_auditoria   String    @default(dbgenerated("1")) @db.Char(1)
+  fecha_creacion     DateTime  @default(now()) @db.Timestamp(6)
+  fecha_modificacion DateTime? @db.Timestamp(6)
+}
+
+model paises {
+  id_pais            Int       @id(map: "pais_pkey") @default(autoincrement())
+  nombre             String    @db.VarChar(100)
+  estado_auditoria   String    @default(dbgenerated("1")) @db.Char(1)
   fecha_creacion     DateTime  @default(now()) @db.Timestamp(6)
   fecha_modificacion DateTime? @db.Timestamp(6)
 }

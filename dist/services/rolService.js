@@ -22,7 +22,11 @@ const insertarRol = (rol) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.insertarRol = insertarRol;
 const listarRoles = () => __awaiter(void 0, void 0, void 0, function* () {
-    const rol = yield prisma.roles.findMany();
+    const rol = yield prisma.roles.findMany({
+        where: {
+            estado_auditoria: '1'
+        }
+    });
     return rol.map((rol) => (0, rolMapper_1.fromPrismaRol)(rol));
 });
 exports.listarRoles = listarRoles;
@@ -30,7 +34,8 @@ const obtenerRol = (idRol) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('rolService::obtenerRol', idRol);
     const rol = yield prisma.roles.findUnique({
         where: {
-            id_rol: idRol
+            id_rol: idRol,
+            estado_auditoria: '1'
         }
     });
     return (0, rolMapper_1.fromPrismaRol)(rol);
@@ -49,7 +54,10 @@ const modificarRol = (idRol, rol) => __awaiter(void 0, void 0, void 0, function*
 exports.modificarRol = modificarRol;
 const eliminarRol = (idRol) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('rolService::eliminarRol', idRol);
-    yield prisma.roles.delete({
+    yield prisma.roles.update({
+        data: {
+            estado_auditoria: '0'
+        },
         where: {
             id_rol: idRol
         }

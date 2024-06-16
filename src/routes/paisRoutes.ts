@@ -7,6 +7,6 @@ router.post('/',insertarPais);
 router.get('/',listarPaises);
 router.get('/:id',obtenerPais);
 router.put('/:id',modificarPais);
-router.delete('/:id',eliminarPais)
+router.patch('/:id',eliminarPais)
 
 export default router;

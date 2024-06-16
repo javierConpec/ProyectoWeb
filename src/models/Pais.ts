@@ -1,7 +1,7 @@
 export interface IPais{
     idPais: number;
     nombre: string;
-    estado: string;
+    estadoAuditoria: string;
     fechaCreacion: Date;
     fechaModificacion: Date;
 }

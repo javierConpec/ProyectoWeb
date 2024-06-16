@@ -14,7 +14,11 @@ export const insertarRol = async (rol: IRol) => {
 
 
 export const listarRoles = async () => {
-    const rol: roles[] = await prisma.roles.findMany();
+    const rol: roles[] = await prisma.roles.findMany({
+        where: {
+            estado_auditoria: '1'
+        }
+    });
     return rol.map((rol: roles)=> fromPrismaRol(rol));
 }
 
@@ -23,7 +27,8 @@ export const obtenerRol = async (idRol: number) => {
     
     const rol: roles = await prisma.roles.findUnique({
         where: {
-            id_rol: idRol
+            id_rol: idRol,
+            estado_auditoria: '1'
         }
     });
     return fromPrismaRol(rol)
@@ -45,10 +50,13 @@ export const modificarRol = async (idRol: number, rol:IRol) => {
 
 export const eliminarRol = async (idRol: number) => {
     console.log('rolService::eliminarRol',idRol);
-    await prisma.roles.delete({
-        where: {
+    await prisma.roles.update({
+        data:{
+            estado_auditoria:'0'
+        },
+        where:{
             id_rol: idRol
         }
-    });
+    })
     return RESPONSE_DELETE_OK;
 }

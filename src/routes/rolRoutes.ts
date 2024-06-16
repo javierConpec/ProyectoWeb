@@ -7,6 +7,6 @@ router.post('/',insertarRol);
 router.get('/',listarRoles);
 router.get('/:id',obtenerRol);
 router.put('/:id',modificarRol);
-router.delete('/:id',eliminarRol);
+router.patch('/:id',eliminarRol);
 
 export default router;

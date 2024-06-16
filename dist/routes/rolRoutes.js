@@ -10,6 +10,6 @@ router.post('/', rolController_1.insertarRol);
 router.get('/', rolController_1.listarRoles);
 router.get('/:id', rolController_1.obtenerRol);
 router.put('/:id', rolController_1.modificarRol);
-router.delete('/:id', rolController_1.eliminarRol);
+router.patch('/:id', rolController_1.eliminarRol);
 exports.default = router;
 //# sourceMappingURL=rolRoutes.js.map
