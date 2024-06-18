@@ -7,24 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model roles {
-  id_rol             Int       @id @default(autoincrement())
-  nombre             String?   @db.VarChar(100)
-  estado_auditoria   String?   @default(dbgenerated("1")) @db.Char(1)
-  fecha_creacion     DateTime  @default(now()) @db.Timestamptz(6)
-  fecha_modificacion DateTime? @db.Timestamp(6)
-}
-
-model paquetes {
-  id_paquete         Int       @id @default(autoincrement())
-  nombre             String    @db.VarChar(100)
-  descripcion        String?   @db.VarChar(100)
-  descuento          Int
-  estado_auditoria   String    @default(dbgenerated("1")) @db.VarChar(1)
-  fecha_creacion     DateTime  @default(now()) @db.Timestamp(6)
-  fecha_modificacion DateTime? @db.Timestamp(6)
-}
-
 model categorias {
   id_categoria       Int       @id @default(autoincrement())
   nombre             String    @db.VarChar(100)
@@ -39,5 +21,23 @@ model paises {
   nombre             String?   @db.VarChar(100)
   estado_auditoria   String?   @default(dbgenerated("1")) @db.Char(1)
   fecha_creacion     DateTime  @default(now()) @db.Timestamp(6)
+  fecha_modificacion DateTime? @db.Timestamp(6)
+}
+
+model paquetes {
+  id_paquete         Int       @id @default(autoincrement())
+  nombre             String    @db.VarChar(100)
+  descripcion        String?   @db.VarChar(100)
+  descuento          Int
+  estado_auditoria   String    @default(dbgenerated("1")) @db.VarChar(1)
+  fecha_creacion     DateTime  @default(now()) @db.Timestamp(6)
+  fecha_modificacion DateTime? @db.Timestamp(6)
+}
+
+model roles {
+  id_rol             Int       @id @default(autoincrement())
+  nombre             String?   @db.VarChar(100)
+  estado_auditoria   String?   @default(dbgenerated("1")) @db.Char(1)
+  fecha_creacion     DateTime  @default(now()) @db.Timestamptz(6)
   fecha_modificacion DateTime? @db.Timestamp(6)
 }
