@@ -12,13 +12,12 @@ const paisRoutes_1 = __importDefault(require("./routes/paisRoutes"));
 const categoriaRoutes_1 = __importDefault(require("./routes/categoriaRoutes"));
 const paqueteRoutes_1 = __importDefault(require("./routes/paqueteRoutes"));
 const app = (0, express_1.default)();
-//Database
 //Midlewares
 app.use(express_1.default.json());
 //Routes
 app.use('/api/v1.0/roles', rolRoutes_1.default);
 app.use('/api/v1.0/pais', paisRoutes_1.default);
-app.use('/api/v1.0/categoria', categoriaRoutes_1.default);
-app.use('/api/v1.0/paquete', paqueteRoutes_1.default);
+app.use('/api/v1.0/categorias', categoriaRoutes_1.default);
+app.use('/api/v1.0/paquetes', paqueteRoutes_1.default);
 exports.default = app;
 //# sourceMappingURL=app.js.map

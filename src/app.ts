@@ -17,7 +17,7 @@ app.use(express.json());
 
 //Routes
 app.use('/api/v1.0/roles',rolesRoutes);
-app.use('/api/v1.0/pais',paisRoutes);
-app.use('/api/v1.0/categoria',categoriaRoutes);
-app.use('/api/v1.0/paquete',paqueteRoutes);
+app.use('/api/v1.0/paises',paisRoutes);
+app.use('/api/v1.0/categorias',categoriaRoutes);
+app.use('/api/v1.0/paquetes',paqueteRoutes);
 export default app;
