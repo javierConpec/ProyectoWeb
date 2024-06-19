@@ -1,12 +1,13 @@
 import { PrismaClient, roles } from "@prisma/client";
 import { IRol } from "../models/Rol";
-import { RESPONSE_INSERT_OK, RESPONSE_UPDATE_OK,RESPONSE_DELETE_OK } from "../shared/constants";
+import { RESPONSE_INSERT_OK, RESPONSE_UPDATE_OK,
+         RESPONSE_DELETE_OK } from "../shared/constants";
 import { fromPrismaRol, toPrismaRol } from "../mappers/rolMapper";
 
 const prisma = new PrismaClient();
 
 export const insertarRol = async (rol: IRol) => {
-    await prisma.roles.create({
+    await prisma.roles.create({      
         data: toPrismaRol(rol)
     });
     return RESPONSE_INSERT_OK;

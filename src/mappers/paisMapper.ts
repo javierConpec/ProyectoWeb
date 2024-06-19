@@ -2,7 +2,7 @@ import { paises } from "@prisma/client";
 import { IPais } from "../models/Pais";
 
 export const fromPrismaPais = (pais: paises): any=>({
-    idPais:1,
+    idPais:pais.id_pais,
     nombre: pais.nombre,
 })
 

@@ -10,7 +10,7 @@ import paqueteRoutes from './routes/paqueteRoutes';
 
 const app: Application = express();
 
-//Database
+
 
 //Midlewares
 app.use(express.json());

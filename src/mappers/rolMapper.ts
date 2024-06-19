@@ -2,7 +2,7 @@ import { roles } from "@prisma/client"
 import { IRol } from "../models/Rol"
 
 export const fromPrismaRol = (roles: roles): any =>({
-    idRol: 1,
+    idRol: roles.id_rol,
     nombre: roles.nombre,
 })
 
