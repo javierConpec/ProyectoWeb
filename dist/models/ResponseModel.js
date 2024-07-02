@@ -11,8 +11,8 @@ class ResponseModel {
     static success(data, message = 'OK') {
         return new ResponseModel(true, message, 200, data);
     }
-    static error(message) {
-        return new ResponseModel(false, message, 500, null);
+    static error(message, code = 500) {
+        return new ResponseModel(false, message, code, null);
     }
 }
 exports.ResponseModel = ResponseModel;
