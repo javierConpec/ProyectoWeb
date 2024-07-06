@@ -1,18 +1,18 @@
 import { Request,Response } from "express";
-import * as paqueteService from "../services/paqueteService";
+import * as reservaService from "../services/reservaService";
 import { ResponseModel } from "../models/ResponseModel";
-import { insertarPaqueteSchema,modificarPaqueteSchema } from "../schemas/paqueteSchema";
+import { insertarReservaSchema,modificarReservaSchema } from "../schemas/reservaSchema";
 
-export const insertarPaquete = async (req: Request, res: Response) => {
-    console.log('paqueteController::insertarPaquete');
+export const insertarReserva = async (req: Request, res: Response) => {
+    console.log('reservaController::insertarReserva');
     try {
-        const { error } = insertarPaqueteSchema.validate(req.body);
+        const { error } = insertarReservaSchema.validate(req.body);
         if (error) {
             console.error(error.message);
             res.status(400).json(ResponseModel.error(error.message, 400));
             return;
         }
-        const response = await paqueteService.insertarPaquete(req.body);
+        const response = await reservaService.insertarResrva(req.body);
         res.status(200).json(ResponseModel.success(null, response));
     } catch (error) {
         console.error(error.message);
@@ -20,40 +20,40 @@ export const insertarPaquete = async (req: Request, res: Response) => {
     }
 };
 
-export const listarPaquetes = async (req: Request, res: Response) => {
-    console.log('paqueteController::listarPaquetes');
+export const listarReservas = async (req: Request, res: Response) => {
+    console.log('reservaConotroller::listarReserva');
     try {
-        const paquete = await paqueteService.listarPaquetes();
-        res.status(200).json(ResponseModel.success(paquete));
+        const reserva = await reservaService.listarResrvas();
+        res.status(200).json(ResponseModel.success(reserva));
     } catch (error) {
         console.error(error.message);
         res.status(500).json(ResponseModel.error(error.message));
     }
 };
 
-export const obtenerPaquete = async (req: Request, res: Response) => {
-    console.log('paqueteController::obtenerPaquete');
+export const obtenerResrva = async (req: Request, res: Response) => {
+    console.log('resrvaController::obtenerReserva');
     try {
         const { id } = req.params;
-        const paquete = await paqueteService.obtenerPaquete(Number(id));
-        res.status(200).json(ResponseModel.success(paquete));
+        const reserva = await reservaService.obtenerReserva(Number(id));
+        res.status(200).json(ResponseModel.success(reserva));
     } catch (error) {
         console.error(error.message);
         res.status(500).json(ResponseModel.error(error.message));
     }
 };
 
-export const modificarPaquete = async (req: Request, res: Response) => {
-    console.log('paqueteController::modificarPaquete');
+export const modificarReserva = async (req: Request, res: Response) => {
+    console.log('reservaController::modificarReserva');
     try {
         const { id } = req.params;
-        const { error } = modificarPaqueteSchema.validate(req.body);
+        const { error } = modificarReservaSchema.validate(req.body);
         if (error) {
             console.error(error.message);
             res.status(400).json(ResponseModel.error(error.message, 400));
             return;
         }
-        const response = await paqueteService.modificarPaquete(Number(id), req.body);
+        const response = await reservaService.modificarReserva(Number(id), req.body);
         res.status(200).json(ResponseModel.success(null, response));
     } catch (error) {
         console.error(error.message);
@@ -61,11 +61,11 @@ export const modificarPaquete = async (req: Request, res: Response) => {
     }
 };
 
-export const eliminarPaquete = async (req: Request, res: Response) => {
-    console.log('paqueteController::eliminarPaquete');
+export const eliminarReserva = async (req: Request, res: Response) => {
+    console.log('reservaControlller::eliiinarReserva');
     try {
         const { id } = req.params;
-        const response = await paqueteService.eliminarPaquete(Number(id));
+        const response = await reservaService.eliminarReserva(Number(id));
         res.status(200).json(ResponseModel.success(null, response));
     } catch (error) {
         console.error(error.message);

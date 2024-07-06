@@ -1,32 +1,31 @@
-import { roles,usuarios } from "@prisma/client";
+import { usuarios, roles } from "@prisma/client";
 import { IUsuario } from "../models/usuario";
 import { fromPrismaRol } from "./rolMapper";
 
-export const fromPrismaUsuario = (usuario: usuarios, rol:roles): any =>({
-    idUsuario:usuario.id_usuario,
-    rol:fromPrismaRol(rol),
-    nombres:usuario.nombres,
-    apellidoPaterno:usuario.apellido_paterno,
-    apellidoMaterno:usuario.apellido_materno,
-    userName:usuario.username,
-    email:usuario.email,
-    telefono:usuario.telefono,
-    direccion:usuario.direccion,
-    sexo:usuario.sexo,
-    fechaCreacion:usuario.fecha_creacion
-    
-});
-
-export const toPrismaUsuario = (usuario:IUsuario):any=>({
-    id_usario:usuario.idUsuario,
-    id_rol:usuario.rol.idRol,
-    nombres:usuario.nombres,
-    apellido_Paterno:usuario.apellidoPaterno,
-    apellido_Materno:usuario.apellidoMaterno,
-    username:usuario.username,
-    email:usuario.email,
-    telefono:usuario.telefono,
-    direccion:usuario.direccion
-
+export const fromPrismaUsuario = (usuarios: usuarios, rol: roles): any=>({
+    idUsuario: usuarios.id_usuario,
+    rol: fromPrismaRol(rol),
+    nombre: usuarios.nombres,
+    apellidoPaterno: usuarios.apellido_paterno,
+    apellidoMaterno: usuarios.apellido_materno,
+    username: usuarios.username,
+    email: usuarios.email,
+    clave: usuarios.clave,
+    telefono: usuarios.telefono,
+    direccion: usuarios.direccion,
+    sexo: usuarios.sexo
 })
- 
+
+export const toPrismaUsuario = (usuarios: IUsuario):any=> ({
+    id_usuario: usuarios.idUsuario,
+    id_rol: usuarios.rol.idRol,
+    nombres: usuarios.nombres,
+    apellido_paterno: usuarios.apellidoPaterno,
+    apellido_materno: usuarios.apellidoMaterno,
+    username: usuarios.username,
+    email: usuarios.email,
+    clave: usuarios.clave,
+    telefono: usuarios.telefono,
+    direccion: usuarios.direccion,
+    sexo: usuarios.sexo,
+})
