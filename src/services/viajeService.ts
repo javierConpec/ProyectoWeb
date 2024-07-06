@@ -15,9 +15,21 @@ export const insertarViaje = async (viaje: IViaje) => {
 export const listarViajes = async () => {
     const viajes: viajes[] = await prisma.viajes.findMany({
         include: {
-            destinos:true,
+            destinos: {
+                include: {
+                    paises: true
+                }
+            },
             categorias: true,
-            hospedajes: true,
+            hospedajes: {
+                include: {
+                    destinos: {
+                        include: {
+                            paises: true
+                        }
+                    }
+                }
+            },
             paquetes: true
         },
         where: {
@@ -25,7 +37,14 @@ export const listarViajes = async () => {
         }
     });
     console.log('viajeService::viajes', viajes);
-    return viajes.map((viaje: any) => fromPrismaViaje(viaje,viaje.categorias,viaje.paquetes,viaje.hospedajes,viaje.hospedajes.destinos,viaje.hospedajes.destinos.paises));
+    return viajes.map((viaje: any) => fromPrismaViaje(
+        viaje,
+        viaje.paquetes,
+        viaje.categorias,
+        viaje.hospedajes,
+        viaje.hospedajes?.destinos,
+        viaje.hospedajes?.destinos?.paises
+    ));
 }
 
 export const obtenerViaje = async (idViaje: number) => {
@@ -36,13 +55,32 @@ export const obtenerViaje = async (idViaje: number) => {
             id_viaje: idViaje
         },
         include: {
-            destinos:true,
-            hospedajes: true,
+            destinos: {
+                include: {
+                    paises: true
+                }
+            },
+            hospedajes: {
+                include: {
+                    destinos: {
+                        include: {
+                            paises: true
+                        }
+                    }
+                }
+            },
             categorias: true,
-            paquetes:true
+            paquetes: true
         }
     });
-    return fromPrismaViaje(viaje,viaje.categorias,viaje.paquetes,viaje.hospedajes,viaje.hospedajes.destinos,viaje.hospedajes.destinos.paises);
+    return fromPrismaViaje(
+        viaje,
+        viaje.paquetes,
+        viaje.categorias,
+        viaje.hospedajes,
+        viaje.hospedajes?.destinos,
+        viaje.hospedajes?.destinos?.paises
+    );
 }
 
 export const modificarViaje = async (idViaje: number, viaje: IViaje) => {

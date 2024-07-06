@@ -5,27 +5,39 @@ import { fromPrismaItinerario, toPrismaItinerario } from "../mappers/itinerarioM
 
 const prisma = new PrismaClient();
 
-export const insertarItinerario = async (Itinerario: IItinerario) => {
+export const insertarItinerario = async (itinerario: IItinerario) => {
     await prisma.itinerarios_.create({
-        data: toPrismaItinerario(Itinerario)
+        data: toPrismaItinerario(itinerario)
     });
     return RESPONSE_INSERT_OK;
 }
 
 export const listarItinerarios = async () => {
-    const Itinerario: itinerarios_[] = await prisma.itinerarios_.findMany({
+    const itinerarios: itinerarios_[] = await prisma.itinerarios_.findMany({
         include: {
-            viajes: true,
+            viajes: {
+                include: {
+                    destinos: {
+                        include: {
+                            paises: true
+                        }
+                    },
+                    hospedajes: true,
+                    categorias: true,
+                    paquetes: true
+                }
+            }
         },
         where: {
             estado_auditoria: '1'
         }
     });
-    console.log('itinerarioService::listarItinerarios', Itinerario);
-    return Itinerario.map((Itinerario: any) => fromPrismaItinerario(Itinerario,Itinerario.viajes, Itinerario.viajes.destinos, Itinerario.viajes.hospedajes, Itinerario.viajes.categorias, Itinerario.viajes.paquete, Itinerario.viajes.paises));
+    console.log('itinerarioService::listarItinerarios', itinerarios);
+    return itinerarios.map((itinerario: any) => fromPrismaItinerario(itinerario,itinerario.viajes, itinerario.viajes.destinos,itinerario.viajes.hospedajes,itinerario.viajes.categorias,itinerario.viajes.paquetes,itinerario.viajes.destinos.paises
+    ));
 }
 
-export const obtenerItnerario = async (idItinerario: number) => {
+export const obtenerItinerario = async (idItinerario: number) => {
     console.log('itinerarioService::obtenerItinerario', idItinerario);
 
     const itinerario: any = await prisma.itinerarios_.findUnique({
@@ -33,14 +45,26 @@ export const obtenerItnerario = async (idItinerario: number) => {
             id_itinerario: idItinerario
         },
         include: {
-            viajes: true,
-            
+            viajes: {
+                include: {
+                    destinos: {
+                        include: {
+                            paises: true
+                        }
+                    },
+                    hospedajes: true,
+                    categorias: true,
+                    paquetes: true
+                }
+            }
         }
     });
-    return fromPrismaItinerario(itinerario,itinerario.viajes, itinerario.viajes.destinos, itinerario.viajes.hospedajes, itinerario.viajes.categorias, itinerario.viajes.paquete, itinerario.viajes.paises);
+    return fromPrismaItinerario(
+        itinerario,itinerario.viajes,itinerario.viajes.destinos,itinerario.viajes.hospedajes,itinerario.viajes.categorias,itinerario.viajes.paquetes, itinerario.viajes.destinos.paises
+    );
 }
 
-export const modificarItiinerario = async (idItinerario: number, itinerario: IItinerario) => {
+export const modificarItinerario = async (idItinerario: number, itinerario: IItinerario) => {
     console.log('itinerarioService::modificarItinerario', idItinerario);
 
     await prisma.itinerarios_.update({
@@ -52,7 +76,7 @@ export const modificarItiinerario = async (idItinerario: number, itinerario: IIt
     return RESPONSE_UPDATE_OK;
 }
 
-export const elimnarItinerario = async (idItinerario: number) => {
+export const eliminarItinerario = async (idItinerario: number) => {
     console.log('itinerarioService::eliminarItinerario', idItinerario);
 
     await prisma.itinerarios_.update({

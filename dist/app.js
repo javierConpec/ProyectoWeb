@@ -30,6 +30,6 @@ app.use('/api/v1.0/destino', destinoRoutes_1.default);
 app.use('/api/v1.0/hospedaje', hospedajeRoutes_1.default);
 app.use('/api/v1.0/viaje', viajeRouter_1.default);
 app.use('/api/v1.0/itinerario', itinerarioRoutes_1.default);
-app.use('/api/v1.0/itinerario', reservaRoutes_1.default);
+app.use('/api/v1.0/reserva', reservaRoutes_1.default);
 exports.default = app;
 //# sourceMappingURL=app.js.map

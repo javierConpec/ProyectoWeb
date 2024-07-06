@@ -16,14 +16,22 @@ export const listarPaquetes = async () => {
     const paquetes: paquetes[] = await prisma.paquetes.findMany({
         include: {
             categorias: true,
-            hospedajes: true
+            hospedajes: {
+                include: {
+                    destinos: {
+                        include: {
+                            paises: true
+                        }
+                    }
+                }
+            }
         },
         where: {
             estado_auditoria: '1'
         }
     });
     console.log('paqueteService::paquetes', paquetes);
-    return paquetes.map((paquete: any) => fromPrismaPaquete(paquete,paquete.categorias,paquete.hospedajes,paquete.hospedajes.destinos,paquete.hospedajes.destinos.paises));
+    return paquetes.map((paquete: any) => fromPrismaPaquete(paquete, paquete.categorias, paquete.hospedajes, paquete.hospedajes.destinos, paquete.hospedajes.destinos.paises));
 }
 
 export const obtenerPaquete = async (idPaquete: number) => {
@@ -34,11 +42,19 @@ export const obtenerPaquete = async (idPaquete: number) => {
             id_paquete: idPaquete
         },
         include: {
-            hospedajes: true,
-            categorias: true
+            categorias: true,
+            hospedajes: {
+                include: {
+                    destinos: {
+                        include: {
+                            paises: true
+                        }
+                    }
+                }
+            }
         }
     });
-    return fromPrismaPaquete(paquete,paquete.categorias,paquete.Hospedajes,paquete.hospedajes.destinos,paquete.hospedajes.destinos.paises);
+    return fromPrismaPaquete(paquete, paquete.categorias, paquete.hospedajes, paquete.hospedajes.destinos, paquete.hospedajes.destinos.paises);
 }
 
 export const modificarPaquete = async (idPaquete: number, paquete: IPaquete) => {

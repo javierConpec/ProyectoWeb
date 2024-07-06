@@ -31,5 +31,5 @@ app.use('/api/v1.0/destino',destinoRoutes);
 app.use('/api/v1.0/hospedaje',hospedajeRoutes);
 app.use('/api/v1.0/viaje',viajeRouter);
 app.use('/api/v1.0/itinerario',itinerarioRouter);
-app.use('/api/v1.0/itinerario',reservaRoutes);
+app.use('/api/v1.0/reserva',reservaRoutes);
 export default app;

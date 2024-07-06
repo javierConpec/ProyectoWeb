@@ -7,6 +7,6 @@ router.post('/', insertarUsuario);
 router.get('/', listarUsuarios);
 router.get('/:id', obtenerUsuario);
 router.put('/:id', modificarUsuario);
-router.delete('/:id', eliminarUsuario);
+router.patch('/:id', eliminarUsuario);
 
 export default router;

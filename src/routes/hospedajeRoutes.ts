@@ -6,6 +6,6 @@ router.post('/',insertarHospedaje);
 router.get('/', listarHospedajes);
 router.get('/:id', obtenerHospedaje);
 router.put('/:id', modifiicarHospedaje);
-router.delete('/:id', eliminarHospedaje);
+router.patch('/:id', eliminarHospedaje);
 
 export default router;

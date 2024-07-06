@@ -35,7 +35,7 @@ export const obtnerItinerario = async (req: Request, res: Response) => {
     console.log('itinerarioController::obtenerItinerario');
     try {
         const { id } = req.params;
-        const itinerario = await itinerarioService.obtenerItnerario(Number(id));
+        const itinerario = await itinerarioService.obtenerItinerario(Number(id));
         res.status(200).json(ResponseModel.success(itinerario));
     } catch (error) {
         console.error(error.message);
@@ -53,7 +53,7 @@ export const modificarItinerario = async (req: Request, res: Response) => {
             res.status(400).json(ResponseModel.error(error.message, 400));
             return;
         }
-        const response = await itinerarioService.modificarItiinerario(Number(id), req.body);
+        const response = await itinerarioService.modificarItinerario(Number(id), req.body);
         res.status(200).json(ResponseModel.success(null, response));
     } catch (error) {
         console.error(error.message);
@@ -65,7 +65,7 @@ export const eliminarItinerario = async (req: Request, res: Response) => {
     console.log('itinerarioController::eliminarItinerario');
     try {
         const { id } = req.params;
-        const response = await itinerarioService.elimnarItinerario(Number(id));
+        const response = await itinerarioService.eliminarItinerario(Number(id));
         res.status(200).json(ResponseModel.success(null, response));
     } catch (error) {
         console.error(error.message);
