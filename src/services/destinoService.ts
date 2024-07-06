@@ -15,7 +15,7 @@ export const insertarDestino = async (destino: IDestino) => {
 export const listarDestinos = async () => {
     const destinos: any[] = await prisma.destinos.findMany({
         include: {
-            paises: true
+            paises:true
         }
     });
     console.log('destinoService::destinos', destinos);
@@ -45,10 +45,14 @@ export const modificarDestino = async (idDestino: number, destino: IDestino) => 
 }
 
 export const eliminarDestino = async (idDestino: number) => {
-    await prisma.destinos.delete({
-        where: {
-            id_destino: idDestino
+    console.log('destinoService::eliminarDestino', idDestino);
+    await prisma.destinos.update({
+        data: {
+            estado_auditoria:'0'
+        },
+        where:{
+            id_destino:idDestino
         }
-    });
+    })
     return RESPONSE_DELETE_OK;
 }

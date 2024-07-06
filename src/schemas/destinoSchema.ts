@@ -3,38 +3,38 @@ import Joi from "joi";
 const destinoBaseSchema = {
     nombres: Joi.string()
         .pattern(new RegExp('^[a-zA-Z]+$'))  // Patrón que permite solo letras sin espacios
-        .max(100)
-        .required(),
+        .max(100),
+        
     apellidoPaterno: Joi.string()
         .pattern(new RegExp('^[a-zA-Z]+$'))  // Patrón que permite solo letras sin espacios
-        .max(100)
-        .required(),
+        .max(100),
+        
     apellidoMaterno: Joi.string()
         .pattern(new RegExp('^[a-zA-Z]+$'))  // Patrón que permite solo letras sin espacios
-        .max(100)
-        .required(),
+        .max(100),
+        
     username: Joi.string()
         .alphanum()
         .min(3)
-        .max(100)
-        .required(),    
+        .max(100),
+         
     email: Joi.string()
         .email()
         .max(100)
-        .required(),
+        ,
     clave: Joi.string()
         .max(100)
         .pattern(new RegExp('^[a-zA-Z0-9]+$'))  // Patrón que permite letras mayúsculas, minúsculas y números
-        .required(),
+        ,
     telefono: Joi.string()
         .pattern(new RegExp('^[0-9]{7,10}$'))  // Patrón que permite de 7 a 10 dígitos numéricos
-        .required(),
+       ,
     direccion: Joi.string()
         .max(100)
-        .required(),
+        ,
     sexo: Joi.string()
         .valid('M', 'F', 'O')  // Valores válidos para sexo: M (masculino), F (femenino), O (otro)
-        .required(),
+      ,
 };
 
 export const insertarDestinoSchema = Joi.object({

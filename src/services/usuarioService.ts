@@ -45,10 +45,14 @@ export const modificarUsuario = async (idUsuario: number, usuario: IUsuario) => 
 }
 
 export const eliminarUsuario = async (idUsuario: number) => {
-    await prisma.usuarios.delete({
-        where: {
-            id_usuario: idUsuario
+    console.log('usuarioService::eliminarUsuario', idUsuario);
+    await prisma.usuarios.update({
+        data: {
+            estado_auditoria:'0'
+        },
+        where:{
+            id_usuario:idUsuario
         }
-    });
+    })
     return RESPONSE_DELETE_OK;
 }

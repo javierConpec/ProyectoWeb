@@ -17,6 +17,39 @@ model categorias {
   viajes             viajes[]
 }
 
+model paises {
+  id_pais            Int        @id(map: "pais_pkey") @default(autoincrement())
+  nombre             String     @db.VarChar(100)
+  estado_auditoria   String     @default(dbgenerated("1")) @db.Char(1)
+  fecha_creacion     DateTime   @default(now()) @db.Timestamp(6)
+  fecha_modificacion DateTime?  @db.Timestamp(6)
+  destinos           destinos[]
+}
+
+model paquetes {
+  id_paquete         Int        @id @default(autoincrement())
+  id_hospedaje       Int
+  id_categoria       Int
+  nombre             String     @db.VarChar(100)
+  transporte         String     @db.VarChar(100)
+  precio             Decimal    @db.Money
+  estado_auditoria   String     @default(dbgenerated("1")) @db.Char(1)
+  fecha_creacion     DateTime   @default(now()) @db.Timestamp(6)
+  fecha_modificacion DateTime?  @db.Timestamp(6)
+  categorias         categorias @relation(fields: [id_categoria], references: [id_categoria], onDelete: NoAction, onUpdate: NoAction, map: "fk_paquetes_categoria")
+  hospedajes         hospedajes @relation(fields: [id_hospedaje], references: [id_hospedaje], onDelete: NoAction, onUpdate: NoAction, map: "fk_paquetes_hospedajes")
+  viajes             viajes[]
+}
+
+model roles {
+  id_rol             Int        @id @default(autoincrement())
+  nombre             String     @db.VarChar(100)
+  estado_auditoria   String     @default(dbgenerated("1")) @db.Char(1)
+  fecha_creacion     DateTime   @default(now()) @db.Timestamptz(6)
+  fecha_modificacion DateTime?  @db.Timestamp(6)
+  usuarios           usuarios[]
+}
+
 model destinos {
   id_destino         Int          @id @default(autoincrement())
   id_pais            Int
@@ -58,30 +91,6 @@ model itinerarios_ {
   @@map("itinerarios ")
 }
 
-model paises {
-  id_pais            Int        @id(map: "pais_pkey") @default(autoincrement())
-  nombre             String     @db.VarChar(100)
-  estado_auditoria   String     @default(dbgenerated("1")) @db.Char(1)
-  fecha_creacion     DateTime   @default(now()) @db.Timestamp(6)
-  fecha_modificacion DateTime?  @db.Timestamp(6)
-  destinos           destinos[]
-}
-
-model paquetes {
-  id_paquete         Int        @id @default(autoincrement())
-  id_hospedaje       Int
-  id_categoria       Int
-  nombre             String     @db.VarChar(100)
-  transporte         String     @db.VarChar(100)
-  precio             Decimal    @db.Money
-  estado_auditoria   String     @default(dbgenerated("1")) @db.Char(1)
-  fecha_creacion     DateTime   @default(now()) @db.Timestamp(6)
-  fecha_modificacion DateTime?  @db.Timestamp(6)
-  categorias         categorias @relation(fields: [id_categoria], references: [id_categoria], onDelete: NoAction, onUpdate: NoAction, map: "fk_paquetes_categoria")
-  hospedajes         hospedajes @relation(fields: [id_hospedaje], references: [id_hospedaje], onDelete: NoAction, onUpdate: NoAction, map: "fk_paquetes_hospedajes")
-  viajes             viajes[]
-}
-
 model reservas {
   id_reserva         Int       @id(map: "rervas_pkey") @default(autoincrement())
   id_usuario         Int
@@ -94,15 +103,6 @@ model reservas {
   fecha_modificacion DateTime? @db.Timestamp(6)
   usuarios           usuarios  @relation(fields: [id_usuario], references: [id_usuario], onDelete: NoAction, onUpdate: NoAction, map: "fk_reservas_usuarios")
   viajes             viajes    @relation(fields: [id_viaje], references: [id_viaje], onDelete: NoAction, onUpdate: NoAction, map: "fk_reservas_viajes")
-}
-
-model roles {
-  id_rol             Int        @id @default(autoincrement())
-  nombre             String     @db.VarChar(100)
-  estado_auditoria   String     @default(dbgenerated("1")) @db.Char(1)
-  fecha_creacion     DateTime   @default(now()) @db.Timestamptz(6)
-  fecha_modificacion DateTime?  @db.Timestamp(6)
-  usuarios           usuarios[]
 }
 
 model usuarios {
