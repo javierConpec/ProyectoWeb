@@ -7,6 +7,6 @@ router.post('/', insertarDestino);
 router.get('/', listarDestinos);
 router.get('/:id', obtenerDestino);
 router.put('/:id', modificarDestino);
-router.delete('/:id', eliminarDestino);
+router.patch('/:id', eliminarDestino);
 
 export default router;
