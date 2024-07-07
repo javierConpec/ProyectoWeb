@@ -61,7 +61,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1.0/paises:
+ * /api/v1.0/pais:
  *   get:
  *     summary: Obtiene todos los países
  *     tags: [Paises]
@@ -77,7 +77,7 @@ router.get('/', listarPaises);
 
 /**
  * @swagger
- * /api/v1.0/paises/{id}:
+ * /api/v1.0/pais/{id}:
  *   get:
  *     summary: Obtiene un país por ID
  *     tags: [Paises]
@@ -102,7 +102,7 @@ router.get('/:id', obtenerPais);
 
 /**
  * @swagger
- * /api/v1.0/paises:
+ * /api/v1.0/pais:
  *   post:
  *     summary: Crea un nuevo país
  *     tags: [Paises]
@@ -140,7 +140,7 @@ router.post('/', insertarPais);
 
 /**
  * @swagger
- * /api/v1.0/paises/{id}:
+ * /api/v1.0/pais/{id}:
  *   put:
  *     summary: Actualiza un país existente
  *     tags: [Paises]
@@ -191,7 +191,7 @@ router.put('/:id', modificarPais);
 
 /**
  * @swagger
- * /api/v1.0/paises/{id}:
+ * /api/v1.0/pais/{id}:
  *   patch:
  *     summary: Elimina un país
  *     tags: [Paises]

@@ -61,7 +61,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1.0/roles:
+ * /api/v1.0/rol:
  *   get:
  *     summary: Obtiene todos los roles
  *     tags: [Roles]
@@ -77,7 +77,7 @@ router.get('/', listarRoles);
 
 /**
  * @swagger
- * /api/v1.0/roles/{id}:
+ * /api/v1.0/rol/{id}:
  *   get:
  *     summary: Obtiene un rol por ID
  *     tags: [Roles]
@@ -102,7 +102,7 @@ router.get('/:id', obtenerRol);
 
 /**
  * @swagger
- * /api/v1.0/roles:
+ * /api/v1.0/rol:
  *   post:
  *     summary: Crea un nuevo rol
  *     tags: [Roles]
@@ -140,7 +140,7 @@ router.post('/', insertarRol);
 
 /**
  * @swagger
- * /api/v1.0/roles/{id}:
+ * /api/v1.0/rol/{id}:
  *   put:
  *     summary: Actualiza un rol existente
  *     tags: [Roles]
@@ -191,7 +191,7 @@ router.put('/:id', modificarRol);
 
 /**
  * @swagger
- * /api/v1.0/roles/{id}:
+ * /api/v1.0/rol/{id}:
  *   patch:
  *     summary: Elimina un rol
  *     tags: [Roles]

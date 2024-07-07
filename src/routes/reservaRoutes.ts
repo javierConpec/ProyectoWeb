@@ -166,7 +166,7 @@ router.post('/', insertarReserva);
  * /api/v1.0/reserva/{id}:
  *   put:
  *     summary: Actualiza una reserva existente
- *     tags: [Reserva]
+ *     tags: [Reservas]
  *     parameters:
  *       - in: path
  *         name: id
@@ -257,6 +257,6 @@ router.put('/:id', modificarReserva);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.patch('/:id', eliminarReserva);
+router.delete('/:id', eliminarReserva);
 
 export default router;
