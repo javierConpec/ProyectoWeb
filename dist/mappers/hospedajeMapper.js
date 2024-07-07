@@ -11,7 +11,11 @@ const fromPrismaHospedaje = (hospedaje, destino, pais) => ({
 exports.fromPrismaHospedaje = fromPrismaHospedaje;
 const toPrismaHospedaje = (hospedaje) => ({
     id_hospedaje: hospedaje.idHospedaje,
-    id_destino: hospedaje.destino.idDestino,
+    destino: {
+        connect: {
+            id_destino: hospedaje.destino
+        }
+    },
     nombre: hospedaje.nombre,
     precio: hospedaje.precio
 });

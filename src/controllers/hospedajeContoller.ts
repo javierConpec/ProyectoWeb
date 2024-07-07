@@ -1,17 +1,11 @@
 import { Request,Response } from "express";
 import  * as hospedajeService from "../services/hospedajeService";
 import { ResponseModel } from "../models/ResponseModel";
-import { insertarHospedajeSchema, modificarHospedajeSchema } from "../schemas/hospedajeSchema";
+//import { insertarHospedajeSchema, modificarHospedajeSchema } from "../schemas/hospedajeSchema";
 
 export const insertarHospedaje = async (req:Request, res: Response)=>{
     console.log('hospedajeContrller::insertarHospedaje');
     try{
-        const{error}=insertarHospedajeSchema.validate(req.body);
-        if(error){
-            console.error(error.message);
-            res.status(400).json(ResponseModel.error(error.message,400));
-            return;
-        }
         const response = await hospedajeService.insertarHospedaje(req.body);
         res.status(200).json(ResponseModel.success(null,response));
     }catch(error){
@@ -48,12 +42,6 @@ export const modifiicarHospedaje = async (req: Request, res: Response) => {
     console.log('hospedajeController::modiificarHospedaje');
     try {
         const { id } = req.params;
-        const { error } = modificarHospedajeSchema.validate(req.body);
-        if (error) {
-            console.error(error.message);
-            res.status(400).json(ResponseModel.error(error.message, 400));
-            return;
-        }
         const response = await hospedajeService.modificarHospedaje(Number(id), req.body);
         res.status(200).json(ResponseModel.success(null, response));
     } catch (error) {
@@ -66,7 +54,7 @@ export const eliminarHospedaje = async (req: Request, res: Response) => {
     console.log('hospedajeContoller::eliminarHospedaje');
     try {
         const { id } = req.params;
-        const response = await hospedajeService.eliminarHospedajes(Number(id));
+        const response = await hospedajeService.eliminarHospedaje(Number(id));
         res.status(200).json(ResponseModel.success(null, response));
     } catch (error) {
         console.error(error.message);

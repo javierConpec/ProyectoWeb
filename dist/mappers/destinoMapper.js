@@ -9,7 +9,6 @@ const fromPrismaDestino = (destino, pais) => ({
 });
 exports.fromPrismaDestino = fromPrismaDestino;
 const toPrismaDestino = (destino) => ({
-    id_destino: destino.idDestino,
     id_pais: destino.pais.idPais,
     nombre: destino.nombre
 });

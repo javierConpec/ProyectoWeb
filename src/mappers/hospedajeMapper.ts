@@ -12,7 +12,11 @@ export const fromPrismaHospedaje=(hospedaje:hospedajes,destino:destinos, pais:pa
 
 export const toPrismaHospedaje=(hospedaje:IHospedaje):any=>({
     id_hospedaje:hospedaje.idHospedaje,
-    id_destino:hospedaje.destino.idDestino,
+    destino:{
+        connect:{
+            id_destino: hospedaje.destino
+        }
+    },
     nombre:hospedaje.nombre,
     precio:hospedaje.precio
 })

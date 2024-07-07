@@ -57,7 +57,7 @@ export const modificarHospedaje = async (idHospedaje: number, hospedaje: IHosped
     return RESPONSE_UPDATE_OK;
 }
 
-export const eliminarHospedajes = async (idHospedaje: number) => {
+export const eliminarHospedaje = async (idHospedaje: number) => {
     console.log('hospedajeService::eliminarHospedaje', idHospedaje);
     await prisma.hospedajes.update({
         data: {

@@ -1,35 +1,37 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.swaggerDocs = void 0;
-const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
-const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 const options = {
     definition: {
-        openapi: '3.0.0',
+        openapi: "3.0.0",
         info: {
-            title: 'API de Gestión de Países',
+            title: 'Viajes en Grupo API Documentation',
             version: '1.0.0',
-            description: 'Documentación de la API para la gestión de países',
+            description: 'Documentación de la API para Viajes en Grupo\n' +
+                'Integrantes:\n' +
+                'Contreras Peceros Javier\n' +
+                'Oyola Aldo\n' +
+                'Vinces Jesus'
         },
-        servers: [
-            {
-                url: 'http://localhost:3000/api/v1.0',
-            },
-        ],
     },
-    apis: ['./routes/*.ts'], // Ruta a tus archivos de rutas
+    // Aquí va la ruta del archivo de routes 
+    apis: ['./src/routes/*.ts'],
 };
-const swaggerSpec = (0, swagger_jsdoc_1.default)(options);
-function swaggerDocs(app, port) {
-    app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerSpec));
-    app.get('/api-docs.json', (req, res) => {
+// Genera el documento Swagger en formato JSON
+const swaggerSpec = swaggerJSDoc(options);
+// Función para configurar Swagger en Express
+const swaggerDocs = (app, port) => {
+    // Endpoint para la interfaz de usuario de Swagger
+    app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+    // Endpoint para acceder al JSON de Swagger
+    app.get('/api/v1/docs.json', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(swaggerSpec);
     });
-    console.log(`Swagger docs disponibles en http://localhost:${port}/api-docs`);
-}
+    // Url de la documentacion
+    console.log(`Documentación de la API disponible en http://localhost:${port}/api/v1/docs`);
+};
 exports.swaggerDocs = swaggerDocs;
 //# sourceMappingURL=swagger.js.map

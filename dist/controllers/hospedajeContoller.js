@@ -35,16 +35,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarHospedaje = exports.modifiicarHospedaje = exports.obtenerHospedaje = exports.listarHospedajes = exports.insertarHospedaje = void 0;
 const hospedajeService = __importStar(require("../services/hospedajeService"));
 const ResponseModel_1 = require("../models/ResponseModel");
-const hospedajeSchema_1 = require("../schemas/hospedajeSchema");
+//import { insertarHospedajeSchema, modificarHospedajeSchema } from "../schemas/hospedajeSchema";
 const insertarHospedaje = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('hospedajeContrller::insertarHospedaje');
     try {
-        const { error } = hospedajeSchema_1.insertarHospedajeSchema.validate(req.body);
-        if (error) {
-            console.error(error.message);
-            res.status(400).json(ResponseModel_1.ResponseModel.error(error.message, 400));
-            return;
-        }
         const response = yield hospedajeService.insertarHospedaje(req.body);
         res.status(200).json(ResponseModel_1.ResponseModel.success(null, response));
     }
@@ -83,12 +77,6 @@ const modifiicarHospedaje = (req, res) => __awaiter(void 0, void 0, void 0, func
     console.log('hospedajeController::modiificarHospedaje');
     try {
         const { id } = req.params;
-        const { error } = hospedajeSchema_1.modificarHospedajeSchema.validate(req.body);
-        if (error) {
-            console.error(error.message);
-            res.status(400).json(ResponseModel_1.ResponseModel.error(error.message, 400));
-            return;
-        }
         const response = yield hospedajeService.modificarHospedaje(Number(id), req.body);
         res.status(200).json(ResponseModel_1.ResponseModel.success(null, response));
     }
@@ -102,7 +90,7 @@ const eliminarHospedaje = (req, res) => __awaiter(void 0, void 0, void 0, functi
     console.log('hospedajeContoller::eliminarHospedaje');
     try {
         const { id } = req.params;
-        const response = yield hospedajeService.eliminarHospedajes(Number(id));
+        const response = yield hospedajeService.eliminarHospedaje(Number(id));
         res.status(200).json(ResponseModel_1.ResponseModel.success(null, response));
     }
     catch (error) {

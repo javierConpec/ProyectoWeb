@@ -35,9 +35,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarPaquete = exports.modificarPaquete = exports.obtenerPaquete = exports.listarPaquetes = exports.insertarPaquete = void 0;
 const paqueteService = __importStar(require("../services/paqueteService"));
 const ResponseModel_1 = require("../models/ResponseModel");
+const paqueteSchema_1 = require("../schemas/paqueteSchema");
 const insertarPaquete = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('paqueteController::insertarCategoria');
+    console.log('paqueteController::insertarPaquete');
     try {
+        const { error } = paqueteSchema_1.insertarPaqueteSchema.validate(req.body);
+        if (error) {
+            console.error(error.message);
+            res.status(400).json(ResponseModel_1.ResponseModel.error(error.message, 400));
+            return;
+        }
         const response = yield paqueteService.insertarPaquete(req.body);
         res.status(200).json(ResponseModel_1.ResponseModel.success(null, response));
     }
@@ -50,8 +57,8 @@ exports.insertarPaquete = insertarPaquete;
 const listarPaquetes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('paqueteController::listarPaquetes');
     try {
-        const paquetes = yield paqueteService.listarPaquetes();
-        res.status(200).json(ResponseModel_1.ResponseModel.success(paquetes));
+        const paquete = yield paqueteService.listarPaquetes();
+        res.status(200).json(ResponseModel_1.ResponseModel.success(paquete));
     }
     catch (error) {
         console.error(error.message);
@@ -76,6 +83,12 @@ const modificarPaquete = (req, res) => __awaiter(void 0, void 0, void 0, functio
     console.log('paqueteController::modificarPaquete');
     try {
         const { id } = req.params;
+        const { error } = paqueteSchema_1.modificarPaqueteSchema.validate(req.body);
+        if (error) {
+            console.error(error.message);
+            res.status(400).json(ResponseModel_1.ResponseModel.error(error.message, 400));
+            return;
+        }
         const response = yield paqueteService.modificarPaquete(Number(id), req.body);
         res.status(200).json(ResponseModel_1.ResponseModel.success(null, response));
     }

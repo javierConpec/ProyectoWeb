@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.eliminarHospedajes = exports.modificarHospedaje = exports.obtenerHospedaje = exports.listarHospedajes = exports.insertarHospedaje = void 0;
+exports.eliminarHospedaje = exports.modificarHospedaje = exports.obtenerHospedaje = exports.listarHospedajes = exports.insertarHospedaje = void 0;
 const client_1 = require("@prisma/client");
 const constants_1 = require("../shared/constants");
 const hospedajeMapper_1 = require("../mappers/hospedajeMapper");
@@ -65,7 +65,7 @@ const modificarHospedaje = (idHospedaje, hospedaje) => __awaiter(void 0, void 0,
     return constants_1.RESPONSE_UPDATE_OK;
 });
 exports.modificarHospedaje = modificarHospedaje;
-const eliminarHospedajes = (idHospedaje) => __awaiter(void 0, void 0, void 0, function* () {
+const eliminarHospedaje = (idHospedaje) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('hospedajeService::eliminarHospedaje', idHospedaje);
     yield prisma.hospedajes.update({
         data: {
@@ -77,5 +77,5 @@ const eliminarHospedajes = (idHospedaje) => __awaiter(void 0, void 0, void 0, fu
     });
     return constants_1.RESPONSE_DELETE_OK;
 });
-exports.eliminarHospedajes = eliminarHospedajes;
+exports.eliminarHospedaje = eliminarHospedaje;
 //# sourceMappingURL=hospedajeService.js.map

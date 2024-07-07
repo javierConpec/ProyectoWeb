@@ -15,14 +15,14 @@ const constants_1 = require("../shared/constants");
 const itinerarioMapper_1 = require("../mappers/itinerarioMapper");
 const prisma = new client_1.PrismaClient();
 const insertarItinerario = (itinerario) => __awaiter(void 0, void 0, void 0, function* () {
-    yield prisma.itinerarios_.create({
+    yield prisma.itinerarios.create({
         data: (0, itinerarioMapper_1.toPrismaItinerario)(itinerario)
     });
     return constants_1.RESPONSE_INSERT_OK;
 });
 exports.insertarItinerario = insertarItinerario;
 const listarItinerarios = () => __awaiter(void 0, void 0, void 0, function* () {
-    const itinerarios = yield prisma.itinerarios_.findMany({
+    const itinerarios = yield prisma.itinerarios.findMany({
         include: {
             viajes: {
                 include: {
@@ -47,9 +47,9 @@ const listarItinerarios = () => __awaiter(void 0, void 0, void 0, function* () {
 exports.listarItinerarios = listarItinerarios;
 const obtenerItinerario = (idItinerario) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('itinerarioService::obtenerItinerario', idItinerario);
-    const itinerario = yield prisma.itinerarios_.findUnique({
+    const itinerario = yield prisma.itinerarios.findUnique({
         where: {
-            id_itinerario: idItinerario
+            id_itenerario: idItinerario
         },
         include: {
             viajes: {
@@ -71,10 +71,10 @@ const obtenerItinerario = (idItinerario) => __awaiter(void 0, void 0, void 0, fu
 exports.obtenerItinerario = obtenerItinerario;
 const modificarItinerario = (idItinerario, itinerario) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('itinerarioService::modificarItinerario', idItinerario);
-    yield prisma.itinerarios_.update({
+    yield prisma.itinerarios.update({
         data: (0, itinerarioMapper_1.toPrismaItinerario)(itinerario),
         where: {
-            id_itinerario: idItinerario
+            id_itenerario: idItinerario
         }
     });
     return constants_1.RESPONSE_UPDATE_OK;
@@ -82,12 +82,12 @@ const modificarItinerario = (idItinerario, itinerario) => __awaiter(void 0, void
 exports.modificarItinerario = modificarItinerario;
 const eliminarItinerario = (idItinerario) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('itinerarioService::eliminarItinerario', idItinerario);
-    yield prisma.itinerarios_.update({
+    yield prisma.itinerarios.update({
         data: {
             estado_auditoria: '0'
         },
         where: {
-            id_itinerario: idItinerario
+            id_itenerario: idItinerario
         }
     });
     return constants_1.RESPONSE_DELETE_OK;

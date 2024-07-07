@@ -23,22 +23,46 @@ const insertarPaquete = (paquete) => __awaiter(void 0, void 0, void 0, function*
 exports.insertarPaquete = insertarPaquete;
 const listarPaquetes = () => __awaiter(void 0, void 0, void 0, function* () {
     const paquetes = yield prisma.paquetes.findMany({
+        include: {
+            categorias: true,
+            hospedajes: {
+                include: {
+                    destinos: {
+                        include: {
+                            paises: true
+                        }
+                    }
+                }
+            }
+        },
         where: {
             estado_auditoria: '1'
         }
     });
-    return paquetes.map((paquete) => (0, paqueteMapper_1.fromPrismaPaquete)(paquete));
+    console.log('paqueteService::paquetes', paquetes);
+    return paquetes.map((paquete) => (0, paqueteMapper_1.fromPrismaPaquete)(paquete, paquete.categorias, paquete.hospedajes, paquete.hospedajes.destinos, paquete.hospedajes.destinos.paises));
 });
 exports.listarPaquetes = listarPaquetes;
 const obtenerPaquete = (idPaquete) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('paqueteService::obtenerPaquete', idPaquete);
     const paquete = yield prisma.paquetes.findUnique({
         where: {
-            id_paquete: idPaquete,
-            estado_auditoria: '1'
+            id_paquete: idPaquete
+        },
+        include: {
+            categorias: true,
+            hospedajes: {
+                include: {
+                    destinos: {
+                        include: {
+                            paises: true
+                        }
+                    }
+                }
+            }
         }
     });
-    return (0, paqueteMapper_1.fromPrismaPaquete)(paquete);
+    return (0, paqueteMapper_1.fromPrismaPaquete)(paquete, paquete.categorias, paquete.hospedajes, paquete.hospedajes.destinos, paquete.hospedajes.destinos.paises);
 });
 exports.obtenerPaquete = obtenerPaquete;
 const modificarPaquete = (idPaquete, paquete) => __awaiter(void 0, void 0, void 0, function* () {

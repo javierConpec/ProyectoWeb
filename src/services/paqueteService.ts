@@ -1,81 +1,75 @@
 import { PrismaClient, paquetes } from "@prisma/client";
 import { IPaquete } from "../models/Paquete";
-import { RESPONSE_INSERT_OK, RESPONSE_UPDATE_OK, RESPONSE_DELETE_OK } from "../shared/constants";
+import { RESPONSE_DELETE_OK, RESPONSE_INSERT_OK, RESPONSE_UPDATE_OK } from "../shared/constants";
 import { fromPrismaPaquete, toPrismaPaquete } from "../mappers/paqueteMapper";
 
 const prisma = new PrismaClient();
 
-export const insertarPaquete = async (paquete: IPaquete) => {
+export const insertarPaquete = async (paquete: IPaquete): Promise<string> => {
     await prisma.paquetes.create({
-        data: toPrismaPaquete(paquete)
+        data: {
+            nombre: paquete.nombre,
+            transporte: paquete.transporte,
+            precio: paquete.precio,
+            id_hospedaje: paquete.hospedaje.idHospedaje,
+
+        }
     });
     return RESPONSE_INSERT_OK;
 }
 
-export const listarPaquetes = async () => {
+export const listarPaquetes = async (): Promise<IPaquete[]> => {
     const paquetes: paquetes[] = await prisma.paquetes.findMany({
         include: {
-            categorias: true,
-            hospedajes: {
-                include: {
-                    destinos: {
-                        include: {
-                            paises: true
-                        }
-                    }
-                }
-            }
-        },
-        where: {
-            estado_auditoria: '1'
+            hospedaje: true,
+            categoria: true
         }
     });
-    console.log('paqueteService::paquetes', paquetes);
-    return paquetes.map((paquete: any) => fromPrismaPaquete(paquete, paquete.categorias, paquete.hospedajes, paquete.hospedajes.destinos, paquete.hospedajes.destinos.paises));
+    return paquetes.map((paquete: paquetes) => fromPrismaPaquete(paquete));
 }
 
-export const obtenerPaquete = async (idPaquete: number) => {
-    console.log('paqueteService::obtenerPaquete', idPaquete);
-
-    const paquete: any = await prisma.paquetes.findUnique({
+export const obtenerPaquete = async (idPaquete: number): Promise<IPaquete | null> => {
+    const paquete: paquetes | null = await prisma.paquetes.findUnique({
         where: {
             id_paquete: idPaquete
         },
         include: {
-            categorias: true,
-            hospedajes: {
-                include: {
-                    destinos: {
-                        include: {
-                            paises: true
-                        }
-                    }
-                }
-            }
+            hospedaje: true,
+            categoria: true
         }
     });
-    return fromPrismaPaquete(paquete, paquete.categorias, paquete.hospedajes, paquete.hospedajes.destinos, paquete.hospedajes.destinos.paises);
+    if (paquete) {
+        return fromPrismaPaquete(paquete);
+    }
+    return null;
 }
 
-export const modificarPaquete = async (idPaquete: number, paquete: IPaquete) => {
-    console.log('paqueteService::modificarPaquete', idPaquete, paquete);
-
+export const modificarPaquete = async (idPaquete: number, paquete: IPaquete): Promise<string> => {
     await prisma.paquetes.update({
-        data: toPrismaPaquete(paquete),
         where: {
             id_paquete: idPaquete
+        },
+        data: {
+            nombre: paquete.nombre,
+            transporte: paquete.transporte,
+            precio: paquete.precio,
+            hospedaje: {
+                connect: {
+                    id_hospedaje: paquete.idHospedaje
+                }
+            },
+            categoria: {
+                connect: {
+                    id_categoria: paquete.idCategoria
+                }
+            }
         }
     });
     return RESPONSE_UPDATE_OK;
 }
 
-export const eliminarPaquete = async (idPaquete: number) => {
-    console.log('paqueteService::eliminarPaquete', idPaquete);
-
-    await prisma.paquetes.update({
-        data: {
-            estado_auditoria: '0'
-        },
+export const eliminarPaquete = async (idPaquete: number): Promise<string> => {
+    await prisma.paquetes.delete({
         where: {
             id_paquete: idPaquete
         }

@@ -1,10 +1,10 @@
-import { itinerarios_, viajes, hospedajes, paises, paquetes, destinos, categorias } from "@prisma/client";
+import { itinerarios, viajes, hospedajes, paises, paquetes, destinos, categorias } from "@prisma/client";
 import { IItinerario } from "../models/Itinerario";
 import { fromPrismaViaje } from "./viajeMapper";
 
 
-export const fromPrismaItinerario = (itinerario: itinerarios_, viaje:viajes, destino:destinos,paquete:paquetes,categoria:categorias,hospedaje:hospedajes,pais:paises): any=>({
-    idItinerario:itinerario.id_itinerario,
+export const fromPrismaItinerario = (itinerario: itinerarios, viaje:viajes, destino:destinos,paquete:paquetes,categoria:categorias,hospedaje:hospedajes,pais:paises): any=>({
+    idItinerario:itinerario.id_itenerario,
     viaje:fromPrismaViaje(viaje,paquete,categoria,hospedaje,destino,pais),
     dia:itinerario.dia,
     horaInicio: itinerario.hora_inicio,

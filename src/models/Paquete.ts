@@ -4,10 +4,10 @@ import {IHospedaje} from './Hospedaje'
 export interface IPaquete{
     idPaquete: number;
     categoria: ICategoria;
-    hospedaje:IHospedaje;
+    hospedaje: IHospedaje;
     nombre: string;
     transporte: string;
-    precio: Number;
+    precio: string;
     estadoAuditoria:string;
     fechaCreacion: Date;
     fechaModificacion: Date;

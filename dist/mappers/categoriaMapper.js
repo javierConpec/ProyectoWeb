@@ -4,7 +4,6 @@ exports.toPrismaCategoria = exports.fromPrismaCategoria = void 0;
 const fromPrismaCategoria = (categoria) => ({
     idCategoria: categoria.id_categoria,
     nombre: categoria.nombre,
-    descripcion: categoria.descripcion,
 });
 exports.fromPrismaCategoria = fromPrismaCategoria;
 const toPrismaCategoria = (categoria) => ({
