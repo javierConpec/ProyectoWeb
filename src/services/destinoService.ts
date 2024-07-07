@@ -2,6 +2,7 @@ import { PrismaClient, destinos } from "@prisma/client";
 import { IDestino } from "../models/Destino";
 import { RESPONSE_DELETE_OK, RESPONSE_INSERT_OK, RESPONSE_UPDATE_OK } from "../shared/constants";
 import { fromPrismaDestino, toPrismaDestino } from "../mappers/destinoMapper";
+import { IPais } from "../models/Pais";
 
 const prisma = new PrismaClient();
 

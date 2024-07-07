@@ -7,22 +7,53 @@ const router = express.Router();
  * @swagger
  * tags:
  *   name: Destinos
+ *   description: Operaciones sobre destinos
  */
 
 /**
  * @swagger
  * components:
  *   schemas:
- *     DestinoInput:
+ *     ResponseModel:
  *       type: object
  *       properties:
- *         idPais:
- *           type: number
- *         nombre:
+ *         success:
+ *           type: boolean
+ *           description: Indica si la operación fue exitosa
+ *         message:
  *           type: string
+ *           description: Mensaje de respuesta
+ *         status:
+ *           type: integer
+ *           description: Código de estado HTTP
+ *         data:
+ *           type: object
+ *           description: Datos de respuesta
+ *     Destino:
+ *       type: object
  *       required:
  *         - idPais
  *         - nombre
+ *       properties:
+ *         idDestino:
+ *           type: integer
+ *           description: ID del destino
+ *         Pais:
+ *               $ref: '#/components/schemas/Pais'
+ *         nombre:
+ *           type: string
+ *           description: Nombre del destino
+ *         estadoAuditoria:
+ *           type: string
+ *           description: Estado de auditoría
+ *         fechaCreacion:
+ *           type: string
+ *           format: date-time
+ *           description: Fecha de creación
+ *         fechaModificacion:
+ *           type: string
+ *           format: date-time
+ *           description: Fecha de modificación
  */
 
 /**
@@ -34,6 +65,10 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: Lista de destinos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
  */
@@ -55,8 +90,16 @@ router.get('/', listarDestinos);
  *     responses:
  *       200:
  *         description: Detalles del destino
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       404:
  *         description: Destino no encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
  */
@@ -73,14 +116,33 @@ router.get('/:id', obtenerDestino);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/DestinoInput'
+ *             type: object
+ *             properties:
+ *               idPais:
+ *                 type: integer
+ *                 example: "0"
+ *               nombre:
+ *                 type: string
+ *                 example: "destino"
  *     responses:
  *       201:
  *         description: Destino creado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       400:
  *         description: Datos inválidos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  */
 router.post('/', insertarDestino);
 
@@ -102,16 +164,39 @@ router.post('/', insertarDestino);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/DestinoInput'
+ *             $ref: '#/components/schemas/Destino'
  *     responses:
  *       200:
  *         description: Destino actualizado
+ *         content:
+ *           application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               idPais:
+ *                 type: integer
+ *                 example: "0"
+ *               nombre:
+ *                 type: string
+ *                 example: "destino"
  *       400:
  *         description: Datos inválidos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       404:
  *         description: Destino no encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  */
 router.put('/:id', modificarDestino);
 
@@ -131,10 +216,22 @@ router.put('/:id', modificarDestino);
  *     responses:
  *       200:
  *         description: Destino eliminado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       404:
  *         description: Destino no encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  */
 router.patch('/:id', eliminarDestino);
 

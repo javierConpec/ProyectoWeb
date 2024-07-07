@@ -1,5 +1,11 @@
 import express from 'express';
-import { eliminarPais, modificarPais, listarPaises, insertarPais, obtenerPais } from '../controllers/paisController';
+import {
+    eliminarPais,
+    modificarPais,
+    listarPaises,
+    insertarPais,
+    obtenerPais
+} from '../controllers/paisController';
 
 const router = express.Router();
 
@@ -12,21 +18,66 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1.0/pais:
+ * components:
+ *   schemas:
+ *     ResponseModel:
+ *       type: object
+ *       properties:
+ *         success:
+ *           type: boolean
+ *           description: Indica si la operación fue exitosa
+ *         message:
+ *           type: string
+ *           description: Mensaje de respuesta
+ *         status:
+ *           type: integer
+ *           description: Código de estado HTTP
+ *         data:
+ *           type: object
+ *           description: Datos de respuesta
+ *     Pais:
+ *       type: object
+ *       required:
+ *         - nombre
+ *       properties:
+ *         idPais:
+ *           type: integer
+ *           description: ID del país
+ *         nombre:
+ *           type: string
+ *           description: Nombre del país
+ *         estadoAuditoria:
+ *           type: string
+ *           description: Estado de auditoría
+ *         fechaCreacion:
+ *           type: string
+ *           format: date-time
+ *           description: Fecha de creación
+ *         fechaModificacion:
+ *           type: string
+ *           format: date-time
+ *           description: Fecha de modificación
+ */
+
+/**
+ * @swagger
+ * /api/v1.0/paises:
  *   get:
  *     summary: Obtiene todos los países
  *     tags: [Paises]
  *     responses:
  *       200:
  *         description: Lista de países
- *       500:
- *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  */
 router.get('/', listarPaises);
 
 /**
  * @swagger
- * /api/v1.0/pais/{id}:
+ * /api/v1.0/paises/{id}:
  *   get:
  *     summary: Obtiene un país por ID
  *     tags: [Paises]
@@ -40,16 +91,18 @@ router.get('/', listarPaises);
  *     responses:
  *       200:
  *         description: Detalles del país
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       404:
  *         description: País no encontrado
- *       500:
- *         description: Error interno del servidor
  */
 router.get('/:id', obtenerPais);
 
 /**
  * @swagger
- * /api/v1.0/pais:
+ * /api/v1.0/paises:
  *   post:
  *     summary: Crea un nuevo país
  *     tags: [Paises]
@@ -62,20 +115,32 @@ router.get('/:id', obtenerPais);
  *             properties:
  *               nombre:
  *                 type: string
- *                 example: "España"
+ *                 example: "pais"
  *     responses:
  *       201:
  *         description: País creado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       400:
  *         description: Datos inválidos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  */
 router.post('/', insertarPais);
 
 /**
  * @swagger
- * /api/v1.0/pais/{id}:
+ * /api/v1.0/paises/{id}:
  *   put:
  *     summary: Actualiza un país existente
  *     tags: [Paises]
@@ -95,22 +160,38 @@ router.post('/', insertarPais);
  *             properties:
  *               nombre:
  *                 type: string
- *                 example: "Francia"
+ *                 example: "categoria"
  *     responses:
  *       200:
  *         description: País actualizado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       400:
  *         description: Datos inválidos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       404:
  *         description: País no encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  */
 router.put('/:id', modificarPais);
 
 /**
  * @swagger
- * /api/v1.0/pais/{id}:
+ * /api/v1.0/paises/{id}:
  *   patch:
  *     summary: Elimina un país
  *     tags: [Paises]
@@ -124,10 +205,22 @@ router.put('/:id', modificarPais);
  *     responses:
  *       200:
  *         description: País eliminado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       404:
  *         description: País no encontrado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ResponseModel'
  */
 router.patch('/:id', eliminarPais);
 
