@@ -20,16 +20,6 @@ export const listarViajes = async () => {
                     paises: true
                 }
             },
-            categorias: true,
-            hospedajes: {
-                include: {
-                    destinos: {
-                        include: {
-                            paises: true
-                        }
-                    }
-                }
-            },
             paquetes: true
         },
         where: {
@@ -60,16 +50,6 @@ export const obtenerViaje = async (idViaje: number) => {
                     paises: true
                 }
             },
-            hospedajes: {
-                include: {
-                    destinos: {
-                        include: {
-                            paises: true
-                        }
-                    }
-                }
-            },
-            categorias: true,
             paquetes: true
         }
     });
