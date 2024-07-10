@@ -4,22 +4,26 @@ const itinerarioBaseSchema = {
     dia: Joi.string()
         .pattern(new RegExp('^[a-zA-Z ]+$'))  // Permite letras y espacios
         .max(100),
-        
-    horaInicio: Joi.string()
-        .pattern(new RegExp('^[a-zA-Z0-9 ]+$'))  // Permite letras, números y espacios
-        .max(100),
-        
-    horaFin: Joi.string()
-        .pattern(new RegExp('^[a-zA-Z0-9 ]+$'))  // Permite letras, números y espacios
+        horaInicio: Joi.string()
+        .pattern(new RegExp('^(1[012]|[1-9]) (am|pm)$'))  // Permite formatos como "9 am", "10 pm"
         .max(100),
 
+    horaFin: Joi.string()
+        .pattern(new RegExp('^(1[012]|[1-9]) (am|pm)$'))  // Permite formatos como "9 am", "10 pm"
+        .max(100),
     actividad: Joi.string()
         .pattern(new RegExp('^[a-zA-Z ]+$'))  // Permite letras y espacios
         .max(100),
-
     descripcion: Joi.string()
         .pattern(new RegExp('^[a-zA-Z ]+$'))  // Permite letras y espacios
-        .max(1024)
+        .max(1024),
+    viaje: Joi.object({
+        idViaje:Joi.number()
+        .integer()
+        .positive()
+        .required(),
+
+    })
 };
 
 export const insertarItinerarioSchema = Joi.object({
@@ -31,6 +35,4 @@ export const insertarItinerarioSchema = Joi.object({
     descripcion: itinerarioBaseSchema.descripcion.required()
 });
 
-export const modificarItinerarioSchema = Joi.object({
-    ...itinerarioBaseSchema
-});
+export const modificarItinerarioSchema = Joi.object(itinerarioBaseSchema);

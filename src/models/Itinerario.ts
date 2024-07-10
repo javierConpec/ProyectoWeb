@@ -7,7 +7,7 @@ export interface IItinerario{
     horaInicio:string,
     horaFin:string,
     actividad:string
-    dscripcion:string,
+    descripcion:string,
     estadoAuditoria:string;
     fechaCreacion: Date;
     fechaModificacion: Date;

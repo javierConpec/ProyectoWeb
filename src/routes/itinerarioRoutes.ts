@@ -1,5 +1,5 @@
 import express from 'express';
-import { eliminarItinerario, modificarItinerario, listarItinerarios, insertarItinerario, obtnerItinerario } from '../controllers/itinerarioController';
+import { eliminarItinerario, modificarItinerario, listarItinerarios, insertarItinerario, obtenerItinerario } from '../controllers/itinerarioController';
 
 const router = express.Router();
 
@@ -111,7 +111,7 @@ router.get('/', listarItinerarios);
  *       404:
  *         description: Itinerario no encontrado
  */
-router.get('/:id', obtnerItinerario);
+router.get('/:id', obtenerItinerario);
 
 /**
  * @swagger

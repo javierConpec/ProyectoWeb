@@ -1,18 +1,25 @@
 import { Request, Response } from "express"
 import * as rolService from "../services/rolService";
 import { ResponseModel } from "../models/ResponseModel";
+import { insertarRolSchema,modificarRolSchema } from "../schemas/rolSchema";
 
 
 export const insertarRol = async (req: Request, res: Response) => {
-    console.log('rolController::insertarrol');
+    console.log('rolController::inserrtarRol');
     try {
+        const { error } = insertarRolSchema.validate(req.body);
+        if (error) {
+            console.error(error.message);
+            res.status(400).json(ResponseModel.error(error.message, 400));
+            return;
+        }
         const response = await rolService.insertarRol(req.body);
-        res.status(200).json(ResponseModel.success(null,response));
+        res.status(200).json(ResponseModel.success(null, response));
     } catch (error) {
-        console.error(error.message)
+        console.error(error.message);
         res.status(500).json(ResponseModel.error(error.message));
     }
-}
+};
 
 export const listarRoles = async (req: Request, res: Response) => {
     console.log('rolController::listarRoles');
@@ -42,13 +49,19 @@ export const modificarRol = async (req: Request, res: Response) => {
     console.log('rolController::modificarRol');
     try {
         const { id } = req.params;
-        const response = await rolService.modificarRol(Number(id),req.body)
-        res.status(200).json(ResponseModel.success(null,response));
+        const { error } = modificarRolSchema.validate(req.body);
+        if (error) {
+            console.error(error.message);
+            res.status(400).json(ResponseModel.error(error.message, 400));
+            return;
+        }
+        const response = await rolService.modificarRol(Number(id), req.body);
+        res.status(200).json(ResponseModel.success(null, response));
     } catch (error) {
-        console.error(error.message)
+        console.error(error.message);
         res.status(500).json(ResponseModel.error(error.message));
     }
-}
+};
 
 export const eliminarRol = async (req: Request, res: Response) => {
     console.log('rolController::eliminarRol');

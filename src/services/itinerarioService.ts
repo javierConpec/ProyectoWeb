@@ -1,7 +1,7 @@
-import { PrismaClient, itinerarios_ } from "@prisma/client";
+import { PrismaClient, itinerarios_, viajes, hospedajes, paises, paquetes, destinos, categorias } from "@prisma/client";
 import { IItinerario } from "../models/Itinerario";
-import { RESPONSE_INSERT_OK, RESPONSE_UPDATE_OK, RESPONSE_DELETE_OK } from "../shared/constants";
 import { fromPrismaItinerario, toPrismaItinerario } from "../mappers/itinerarioMapper";
+import { RESPONSE_INSERT_OK, RESPONSE_UPDATE_OK, RESPONSE_DELETE_OK } from "../shared/constants";
 
 const prisma = new PrismaClient();
 
@@ -13,79 +13,124 @@ export const insertarItinerario = async (itinerario: IItinerario) => {
 }
 
 export const listarItinerarios = async () => {
-    const itinerarios: itinerarios_[] = await prisma.itinerarios_.findMany({
-        include: {
-            viajes: {
-                include: {
-                    destinos: {
-                        include: {
-                            paises: true
+    try {
+        const itinerarios: itinerarios_[] = await prisma.itinerarios_.findMany({
+            include: {
+                viajes: {
+                    include: {
+                        destinos: {
+                            include: {
+                                paises: true
+                            }
+                        },
+                        paquetes: {
+                            include: {
+                                hospedajes: true,
+                                categorias: true
+                            }
                         }
-                    },
-                    hospedajes: true,
-                    categorias: true,
-                    paquetes: true
+                    }
                 }
+            },
+            where: {
+                estado_auditoria: '1'
             }
-        },
-        where: {
-            estado_auditoria: '1'
-        }
-    });
-    console.log('itinerarioService::listarItinerarios', itinerarios);
-    return itinerarios.map((itinerario: any) => fromPrismaItinerario(itinerario,itinerario.viajes, itinerario.viajes.destinos,itinerario.viajes.hospedajes,itinerario.viajes.categorias,itinerario.viajes.paquetes,itinerario.viajes.destinos.paises
-    ));
+        });
+
+        console.log('itinerarioService::listarItinerarios', itinerarios);
+
+        return itinerarios.map((itinerario: any) => {
+            return fromPrismaItinerario(
+                itinerario,
+                itinerario.viajes,
+                itinerario.viajes.destinos,
+                itinerario.viajes.hospedajes,
+                itinerario.viajes.categorias,
+                itinerario.viajes.paquetes ,
+                itinerario.viajes.destinos.paises
+            );
+        });
+        
+    } catch (error) {
+        console.error('Error al listar itinerarios:', error);
+        throw error;
+    }
 }
 
 export const obtenerItinerario = async (idItinerario: number) => {
-    console.log('itinerarioService::obtenerItinerario', idItinerario);
-
-    const itinerario: any = await prisma.itinerarios_.findUnique({
-        where: {
-            id_itinerario: idItinerario
-        },
-        include: {
-            viajes: {
-                include: {
-                    destinos: {
-                        include: {
-                            paises: true
+    try {
+        const itinerario: any = await prisma.itinerarios_.findUnique({
+            where: {
+                id_itinerario: idItinerario
+            },
+            include: {
+                viajes: {
+                    include: {
+                        destinos: {
+                            include: {
+                                paises: true
+                            }
+                        },
+                        paquetes: {
+                            include: {
+                                hospedajes: true,
+                                categorias: true
+                            }
                         }
-                    },
-                    hospedajes: true,
-                    categorias: true,
-                    paquetes: true
+                    }
                 }
             }
-        }
-    });
-    return fromPrismaItinerario(
-        itinerario,itinerario.viajes,itinerario.viajes.destinos,itinerario.viajes.hospedajes,itinerario.viajes.categorias,itinerario.viajes.paquetes, itinerario.viajes.destinos.paises
-    );
+        });
+
+        console.log('itinerarioService::obtenerItinerario', itinerario);
+        
+        return fromPrismaItinerario(
+            itinerario,
+            itinerario.viajes,
+            itinerario.viajes.destinos,
+            itinerario.viajes.hospedajes,
+            itinerario.viajes.categorias,
+            itinerario.viajes.paquetes || null,
+            itinerario.viajes.destinos.paises
+        );
+    } catch (error) {
+        console.error('Error al obtener itinerario:', error);
+        throw error;
+    }
 }
 
 export const modificarItinerario = async (idItinerario: number, itinerario: IItinerario) => {
-    console.log('itinerarioService::modificarItinerario', idItinerario);
+    try {
+        console.log('itinerarioService::modificarItinerario', idItinerario);
 
-    await prisma.itinerarios_.update({
-        data: toPrismaItinerario(itinerario),
-        where: {
-            id_itinerario: idItinerario
-        }
-    });
-    return RESPONSE_UPDATE_OK;
+        await prisma.itinerarios_.update({
+            data: toPrismaItinerario(itinerario),
+            where: {
+                id_itinerario: idItinerario
+            }
+        });
+        return RESPONSE_UPDATE_OK;
+    } catch (error) {
+        console.error('Error al modificar itinerario:', error);
+        throw error;
+    }
 }
 
 export const eliminarItinerario = async (idItinerario: number) => {
-    console.log('itinerarioService::eliminarItinerario', idItinerario);
+    try {
+        console.log('itinerarioService::eliminarItinerario', idItinerario);
 
-    await prisma.itinerarios_.update({
-        data: {
-            estado_auditoria: '0'
-        },
-        where: {
-            id_itinerario: idItinerario
-        }
-    });
-    return RESPONSE_DELETE_OK;
+        await prisma.itinerarios_.update({
+            data: {
+                estado_auditoria: '0'
+            },
+            where: {
+                id_itinerario: idItinerario
+            }
+        });
+        return RESPONSE_DELETE_OK;
+    } catch (error) {
+        console.error('Error al eliminar itinerario:', error);
+        throw error;
+    }
 }

@@ -12,7 +12,11 @@ export const insertarViaje = async (req: Request, res: Response) => {
             res.status(400).json(ResponseModel.error(error.message, 400));
             return;
         }
-        const response = await viajeService.insertarViaje(req.body);
+
+        const viaje = req.body;
+        console.log('Datos recibidos en la solicitud:', viaje);
+
+        const response = await viajeService.insertarViaje(viaje);
         res.status(200).json(ResponseModel.success(null, response));
     } catch (error) {
         console.error(error.message);
@@ -21,7 +25,7 @@ export const insertarViaje = async (req: Request, res: Response) => {
 };
 
 export const listarViaje = async (req: Request, res: Response) => {
-    console.log('vaijeController::listarViaje');
+    console.log('viajeController::listarViaje');
     try {
         const viajes = await viajeService.listarViajes();
         res.status(200).json(ResponseModel.success(viajes));

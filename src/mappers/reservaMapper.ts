@@ -14,11 +14,10 @@ export const fromPrismaReserva = (reserva: reservas, usuario: usuarios, rol:role
 });
 
 export const toPrismaReserva = (reserva: IReserva): any => ({
-    id_reserva: reserva.idReserva,
-    id_usuario: reserva.ususario.idUsuario,
-    viaje: reserva.viaje.idViaje,
-    numero_personas:reserva.numeroPersonas,
-    metodo_pago:reserva.metodoPago,
-    pago_total:reserva.pagoTotal,
-
+    id_usuario: reserva.usuario.idUsuario,
+    id_viaje: reserva.viaje.idViaje,
+    numero_personas: reserva.numeroPersonas,
+    metodo_pago: reserva.metodoPago,
+    pago_total: reserva.pagoTotal,
 });
+

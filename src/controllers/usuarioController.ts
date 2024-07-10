@@ -29,8 +29,7 @@ export const listarUsuarios = async (req: Request, res: Response) => {
         console.error(error.message);
         res.status(500).json(ResponseModel.error(error.message));
     }
-    
-}
+};
 
 export const obtenerUsuario = async (req: Request, res: Response) => {
     console.log('usuarioController::obtenerUsuario');

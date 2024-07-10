@@ -1,10 +1,10 @@
-import { Request,Response } from "express";
+import { Request, Response } from "express";
 import * as itinerarioService from "../services/itinerarioService";
 import { ResponseModel } from "../models/ResponseModel";
-import { insertarItinerarioSchema,modificarItinerarioSchema } from "../schemas/itinerarioSchema";
+import { insertarItinerarioSchema, modificarItinerarioSchema } from "../schemas/itinerarioSchema";
 
 export const insertarItinerario = async (req: Request, res: Response) => {
-    console.log('itinerarioController::insertarItinerario');
+    console.log('ItinerarioController::InsertarViaje');
     try {
         const { error } = insertarItinerarioSchema.validate(req.body);
         if (error) {
@@ -21,17 +21,17 @@ export const insertarItinerario = async (req: Request, res: Response) => {
 };
 
 export const listarItinerarios = async (req: Request, res: Response) => {
-    console.log('itnerarioController::listarItinerarios');
+    console.log('ItinerarioController::listarItinerario');
     try {
-        const itinerario = await itinerarioService.listarItinerarios();
-        res.status(200).json(ResponseModel.success(itinerario));
+        const itinerarios = await itinerarioService.listarItinerarios();
+        res.status(200).json(ResponseModel.success(itinerarios));
     } catch (error) {
         console.error(error.message);
         res.status(500).json(ResponseModel.error(error.message));
     }
 };
 
-export const obtnerItinerario = async (req: Request, res: Response) => {
+export const obtenerItinerario = async (req: Request, res: Response) => {
     console.log('itinerarioController::obtenerItinerario');
     try {
         const { id } = req.params;
@@ -56,13 +56,11 @@ export const modificarItinerario = async (req: Request, res: Response) => {
         const response = await itinerarioService.modificarItinerario(Number(id), req.body);
         res.status(200).json(ResponseModel.success(null, response));
     } catch (error) {
-        console.error(error.message);
         res.status(500).json(ResponseModel.error(error.message));
     }
 };
 
 export const eliminarItinerario = async (req: Request, res: Response) => {
-    console.log('itinerarioController::eliminarItinerario');
     try {
         const { id } = req.params;
         const response = await itinerarioService.eliminarItinerario(Number(id));
@@ -71,4 +69,4 @@ export const eliminarItinerario = async (req: Request, res: Response) => {
         console.error(error.message);
         res.status(500).json(ResponseModel.error(error.message));
     }
-}
+};

@@ -35,9 +35,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarRol = exports.modificarRol = exports.obtenerRol = exports.listarRoles = exports.insertarRol = void 0;
 const rolService = __importStar(require("../services/rolService"));
 const ResponseModel_1 = require("../models/ResponseModel");
+const rolSchema_1 = require("../schemas/rolSchema");
 const insertarRol = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('rolController::insertarrol');
+    console.log('rolController::inserrtarRol');
     try {
+        const { error } = rolSchema_1.insertarRolSchema.validate(req.body);
+        if (error) {
+            console.error(error.message);
+            res.status(400).json(ResponseModel_1.ResponseModel.error(error.message, 400));
+            return;
+        }
         const response = yield rolService.insertarRol(req.body);
         res.status(200).json(ResponseModel_1.ResponseModel.success(null, response));
     }
@@ -76,6 +83,12 @@ const modificarRol = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     console.log('rolController::modificarRol');
     try {
         const { id } = req.params;
+        const { error } = rolSchema_1.modificarRolSchema.validate(req.body);
+        if (error) {
+            console.error(error.message);
+            res.status(400).json(ResponseModel_1.ResponseModel.error(error.message, 400));
+            return;
+        }
         const response = yield rolService.modificarRol(Number(id), req.body);
         res.status(200).json(ResponseModel_1.ResponseModel.success(null, response));
     }

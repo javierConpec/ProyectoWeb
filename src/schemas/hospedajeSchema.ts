@@ -1,18 +1,24 @@
 import Joi from "joi";
 
 const hospedajeBaseSchema = {
-    nombres: Joi.string()
-        .pattern(new RegExp('^[a-zA-Z]+$'))  
+    nombre: Joi.string()
+        .pattern(new RegExp('^[a-zA-Z\\s]+$'))  
         .max(100)
         ,
     precio: Joi.number()
        .precision(2)  // Limita el número de decimales a 2
-       .strict() 
+       .strict(), 
+    destino: Joi.object({
+        idDestino:Joi.number()
+        .positive()
+        .integer()
+        .required()
+    })
 };
 
 export const insertarHospedajeSchema = Joi.object({
     ...hospedajeBaseSchema,
-    nombres:hospedajeBaseSchema.nombres.required(),
+    nombre:hospedajeBaseSchema.nombre.required(),
     precio:hospedajeBaseSchema.precio.required(),
 
 });

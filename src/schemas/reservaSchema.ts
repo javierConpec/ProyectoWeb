@@ -5,11 +5,23 @@ const reservaBaseSchema = {
     .strict(),
         
     metodoPago: Joi.string()
-        .pattern(new RegExp('^[a-zA-Z]+$'))  // Patrón que permite solo letras sin espacios
+        .pattern(new RegExp('^[a-zA-Z\\s]+$'))  
         .max(100),
         
     pagoTotal: Joi.number()
         .strict(),
+    usuario:Joi.object({
+        idUsuario:Joi.number()
+        .integer()
+        .positive()
+        .required()
+    }),
+    viaje:Joi.object({
+        idViaje:Joi.number()
+        .integer()
+        .positive()
+        .required()
+    })
         
 
 };

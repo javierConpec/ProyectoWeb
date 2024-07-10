@@ -10,41 +10,42 @@ export const insertarViaje = async (viaje: IViaje) => {
         data: toPrismaViaje(viaje)
     });
     return RESPONSE_INSERT_OK;
-}
+};
 
 export const listarViajes = async () => {
-    const viajes: viajes[] = await prisma.viajes.findMany({
-        include: {
-            destinos: {
-                include: {
-                    paises: true
-                }
-            },
-            categorias: true,
-            hospedajes: {
-                include: {
-                    destinos: {
-                        include: {
-                            paises: true
-                        }
+    try {
+        const viajes: viajes[] = await prisma.viajes.findMany({
+            include: {
+                destinos:{
+                    include:{
+                        paises:true,
+                    }
+                },
+                paquetes: {
+                    include:{
+                        categorias:true,
+                        hospedajes:true
                     }
                 }
             },
-            paquetes: true
-        },
-        where: {
-            estado_auditoria: '1'
-        }
-    });
-    console.log('viajeService::viajes', viajes);
-    return viajes.map((viaje: any) => fromPrismaViaje(
-        viaje,
-        viaje.paquetes,
-        viaje.categorias,
-        viaje.hospedajes,
-        viaje.hospedajes?.destinos,
-        viaje.hospedajes?.destinos?.paises
-    ));
+            where: {
+                estado_auditoria: '1'
+            }
+        });
+
+        console.log('viajeService::viajes', viajes);
+        return viajes.map((viaje: any) => fromPrismaViaje(
+            viaje,
+            viaje.paquetes,
+            viaje.paquetes.hospedajes,
+            viaje.paquetes.categorias,
+            viaje.destinos,
+            viaje.destinos.paises
+        ));
+    } catch (error) {
+        console.error('Error al listar viajes:', error);
+       
+    }
 }
 
 export const obtenerViaje = async (idViaje: number) => {
@@ -60,26 +61,21 @@ export const obtenerViaje = async (idViaje: number) => {
                     paises: true
                 }
             },
-            hospedajes: {
-                include: {
-                    destinos: {
-                        include: {
-                            paises: true
-                        }
-                    }
-                }
-            },
-            categorias: true,
             paquetes: true
         }
     });
+
+    if (!viaje) {
+        throw new Error(`No se encontró el viaje con ID ${idViaje}`);
+    }
+
     return fromPrismaViaje(
         viaje,
         viaje.paquetes,
         viaje.categorias,
         viaje.hospedajes,
-        viaje.hospedajes?.destinos,
-        viaje.hospedajes?.destinos?.paises
+        viaje.hospedajes.destinos,
+        viaje.hospedajes.destinos?.paises
     );
 }
 

@@ -3,7 +3,7 @@ import { IViaje } from "./Viaje";
 
 export interface IReserva{
     idReserva : number;
-    ususario:IUsuario;
+    usuario:IUsuario;
     viaje:IViaje;
     numeroPersonas:number;
     metodoPago:string;

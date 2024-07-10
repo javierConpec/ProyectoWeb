@@ -14,7 +14,6 @@ model categorias {
   fecha_creacion     DateTime   @default(now()) @db.Timestamp(6)
   fecha_modificacion DateTime?  @db.Timestamp(6)
   paquetes           paquetes[]
-  viajes             viajes[]
 }
 
 model paises {
@@ -72,7 +71,6 @@ model hospedajes {
   fecha_modificacion DateTime?  @db.Timestamp(6)
   destinos           destinos   @relation(fields: [id_destino], references: [id_destino], onDelete: NoAction, onUpdate: NoAction, map: "fk_hospedajes_destins")
   paquetes           paquetes[]
-  viajes             viajes[]
 }
 
 model itinerarios_ {
@@ -127,8 +125,6 @@ model usuarios {
 model viajes {
   id_viaje           Int            @id @default(autoincrement())
   id_destino         Int
-  id_categoria       Int
-  id_hospedaje       Int
   id_paquete         Int
   fecha_inicio       DateTime       @db.Date
   fecha_fin          DateTime       @db.Date
@@ -138,8 +134,6 @@ model viajes {
   fecha_modificacion DateTime?      @db.Timestamp(6)
   itinerarios_       itinerarios_[]
   reservas           reservas[]
-  categorias         categorias     @relation(fields: [id_categoria], references: [id_categoria], onDelete: NoAction, onUpdate: NoAction, map: "fk_viajes_categorias")
   destinos           destinos       @relation(fields: [id_destino], references: [id_destino], onDelete: NoAction, onUpdate: NoAction, map: "fk_viajes_destinos")
-  hospedajes         hospedajes     @relation(fields: [id_hospedaje], references: [id_hospedaje], onDelete: NoAction, onUpdate: NoAction, map: "fk_viajes_hospedajes")
   paquetes           paquetes       @relation(fields: [id_paquete], references: [id_paquete], onDelete: NoAction, onUpdate: NoAction, map: "fk_viajes_paquetes")
 }

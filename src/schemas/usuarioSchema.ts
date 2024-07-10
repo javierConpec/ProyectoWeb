@@ -2,15 +2,15 @@ import Joi from "joi";
 
 const usuarioBaseSchema = {
     nombres: Joi.string()
-        .pattern(new RegExp('^[a-zA-Z]$'))
+        .pattern(new RegExp('^[a-zA-Z ]+$'))
         .max(100)
         ,
     apellidoPaterno: Joi.string()
-        .pattern(new RegExp('^[a-zA-Z]$'))
+        .pattern(new RegExp('^[a-zA-Z ]+$'))
         .max(100)
         ,
     apellidoMaterno: Joi.string()
-        .pattern(new RegExp('^[a-zA-Z]$'))
+        .pattern(new RegExp('^[a-zA-Z ]+$'))
         .max(100)
         ,
     username: Joi.string()
@@ -23,17 +23,24 @@ const usuarioBaseSchema = {
         .max(100)
         ,
     clave: Joi.string()
-        .max(100)  // Por ejemplo, máximo 20 caracteres
+        .max(100)  
         .pattern(new RegExp('^[a-zA-Z0-9]+$'))  // Patrón que permite letras mayúsculas, minúsculas y números
         ,
     telefono: Joi.string()
-        .pattern(new RegExp('^[0-9]{7,10}$'))  // Patrón que permite de 7 a 10 dígitos numéricos
+        .pattern(new RegExp('^[0-9]{9}$'))  // Patrón que permite de 9 digitos
         ,
     direccion: Joi.string()
         .max(100),
     sexo: Joi.string()
-        .valid('M', 'F', 'O')  // Valores válidos para sexo: M (masculino), F (femenino), O (otro)
+        .valid('M','F','0')  // Valores válidos para sexo: M (masculino), F (femenino), O(otro)
         ,
+
+    rol:Joi.object({
+        idRol:Joi.number()
+        .integer()
+        .positive()
+        .required()
+    })
 };
 
 export const insertarUsuarioSchema = Joi.object({

@@ -8,5 +8,4 @@ export const fromPrismaCategoria = (categoria: categorias): any=>({
 
 export const toPrismaCategoria = (categoria: ICategoria):any=> ({
     nombre: categoria.nombre,
-    descripcion: categoria.descripcion,
 })

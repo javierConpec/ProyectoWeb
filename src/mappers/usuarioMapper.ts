@@ -17,7 +17,6 @@ export const fromPrismaUsuario = (usuarios: usuarios, rol: roles): any=>({
 })
 
 export const toPrismaUsuario = (usuarios: IUsuario):any=> ({
-    id_usuario: usuarios.idUsuario,
     id_rol: usuarios.rol.idRol,
     nombres: usuarios.nombres,
     apellido_paterno: usuarios.apellidoPaterno,

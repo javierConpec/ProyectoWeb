@@ -13,14 +13,16 @@ export const insertarUsuario = async (usuario: IUsuario) => {
 }
 
 export const listarUsuarios = async () => {
-    const usuarios: any[] = await prisma.usuarios.findMany({
+    const usuarios = await prisma.usuarios.findMany({
+        where: {
+            estado_auditoria: '1'
+        },
         include: {
             roles: true
         }
     });
-    console.log('usuarioService::usuarios', usuarios);
-    return usuarios.map((usuario: any) => fromPrismaUsuario(usuario, usuario.roles));
-}
+    return usuarios.map(usuario => fromPrismaUsuario(usuario, usuario.roles));
+};
 
 export const obtenerUsuario = async (idUsuario: number) => {
     const usuario: any = await prisma.usuarios.findUnique({
