@@ -1,5 +1,11 @@
-import express from 'express';
-import { eliminarReserva, modificarReserva, listarReservas, insertarReserva, obtenerResrva } from '../controllers/reservaController';
+import express from "express";
+import {
+  eliminarReserva,
+  modificarReserva,
+  listarReservas,
+  insertarReserva,
+  obtenerResrva,
+} from "../controllers/reservaController";
 
 const router = express.Router();
 
@@ -29,6 +35,20 @@ const router = express.Router();
  *         data:
  *           type: object
  *           description: Datos de respuesta
+ *     Usuario:
+ *       type: object
+ *       properties:
+ *         idUsuario:
+ *           type: integer
+ *           example: 0
+ *           description: ID del usuario
+ *     Viaje:
+ *       type: object
+ *       properties:
+ *         idViaje:
+ *           type: integer
+ *           example: 0
+ *           description: ID del viaje
  *     Reserva:
  *       type: object
  *       required:
@@ -84,7 +104,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.get('/', listarReservas);
+router.get("/", listarReservas);
 
 /**
  * @swagger
@@ -109,7 +129,7 @@ router.get('/', listarReservas);
  *       404:
  *         description: Reserva no encontrada
  */
-router.get('/:id', obtenerResrva);
+router.get("/:id", obtenerResrva);
 
 /**
  * @swagger
@@ -122,23 +142,7 @@ router.get('/:id', obtenerResrva);
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               idUsuario:
- *                 type: integer
- *                 example: 0
- *               idViaje:
- *                 type: integer
- *                 example: 0
- *               numeroPersonas:
- *                 type: integer
- *                 example: 1
- *               metodoPago:
- *                 type: string
- *                 example: "metodoPago"
- *               pagoTotal:
- *                 type: number
- *                 example: 00.00
+ *             $ref: '#/components/schemas/Reserva'
  *     responses:
  *       201:
  *         description: Reserva creada
@@ -159,7 +163,7 @@ router.get('/:id', obtenerResrva);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.post('/', insertarReserva);
+router.post("/", insertarReserva);
 
 /**
  * @swagger
@@ -179,23 +183,7 @@ router.post('/', insertarReserva);
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               idUsuario:
- *                 type: integer
- *                 example: 0
- *               idViaje:
- *                 type: integer
- *                 example: 0
- *               numeroPersonas:
- *                 type: integer
- *                 example: 1
- *               metodoPago:
- *                 type: string
- *                 example: "metodoPago"
- *               pagoTotal:
- *                 type: number
- *                 example: 00.00
+ *             $ref: '#/components/schemas/Reserva'
  *     responses:
  *       200:
  *         description: Reserva actualizada
@@ -222,13 +210,13 @@ router.post('/', insertarReserva);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.put('/:id', modificarReserva);
+router.put("/:id", modificarReserva);
 
 /**
  * @swagger
  * /api/v1.0/reserva/{id}:
  *   patch:
- *     summary: Elimina una Reserva
+ *     summary: Elimina una reserva
  *     tags: [Reservas]
  *     parameters:
  *       - in: path
@@ -236,7 +224,7 @@ router.put('/:id', modificarReserva);
  *         required: true
  *         schema:
  *           type: integer
- *         description: ID de la Reserva
+ *         description: ID de la reserva
  *     responses:
  *       200:
  *         description: Reserva eliminada
@@ -257,6 +245,6 @@ router.put('/:id', modificarReserva);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.delete('/:id', eliminarReserva);
+router.delete("/:id", eliminarReserva);
 
 export default router;

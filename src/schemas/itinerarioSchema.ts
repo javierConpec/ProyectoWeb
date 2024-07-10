@@ -4,7 +4,7 @@ const itinerarioBaseSchema = {
     dia: Joi.string()
         .pattern(new RegExp('^[a-zA-Z ]+$'))  // Permite letras y espacios
         .max(100),
-        horaInicio: Joi.string()
+    horaInicio: Joi.string()
         .pattern(new RegExp('^(1[012]|[1-9]) (am|pm)$'))  // Permite formatos como "9 am", "10 pm"
         .max(100),
 
@@ -18,10 +18,10 @@ const itinerarioBaseSchema = {
         .pattern(new RegExp('^[a-zA-Z ]+$'))  // Permite letras y espacios
         .max(1024),
     viaje: Joi.object({
-        idViaje:Joi.number()
-        .integer()
-        .positive()
-        .required(),
+        idViaje: Joi.number()
+            .integer()
+            .positive()
+            .required(),
 
     })
 };

@@ -1,5 +1,11 @@
-import express from 'express';
-import { eliminarPaquete, modificarPaquete, listarPaquetes, insertarPaquete, obtenerPaquete } from '../controllers/paqueteController';
+import express from "express";
+import {
+  eliminarPaquete,
+  modificarPaquete,
+  listarPaquetes,
+  insertarPaquete,
+  obtenerPaquete,
+} from "../controllers/paqueteController";
 
 const router = express.Router();
 
@@ -29,6 +35,20 @@ const router = express.Router();
  *         data:
  *           type: object
  *           description: Datos de respuesta
+ *     Categoria:
+ *       type: object
+ *       properties:
+ *         idCategoria:
+ *           type: integer
+ *           example: 0
+ *           description: ID de la categoría del paquete
+ *     Hospedaje:
+ *       type: object
+ *       properties:
+ *         idHospedaje:
+ *           type: integer
+ *           example: 0
+ *           description: ID del hospedaje del paquete
  *     Paquete:
  *       type: object
  *       required:
@@ -81,7 +101,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.get('/', listarPaquetes);
+router.get("/", listarPaquetes);
 
 /**
  * @swagger
@@ -106,7 +126,7 @@ router.get('/', listarPaquetes);
  *       404:
  *         description: Paquete no encontrado
  */
-router.get('/:id', obtenerPaquete);
+router.get("/:id", obtenerPaquete);
 
 /**
  * @swagger
@@ -121,12 +141,18 @@ router.get('/:id', obtenerPaquete);
  *           schema:
  *             type: object
  *             properties:
- *               idCategoria:
- *                 type: integer
- *                 example: "0"
- *               idHospedaje:
- *                 type: integer
- *                 example: "0"
+ *               categoria:
+ *                 type: object
+ *                 properties:
+ *                   idCategoria:
+ *                     type: integer
+ *                     example: 0
+ *               hospedaje:
+ *                 type: object
+ *                 properties:
+ *                   idHospedaje:
+ *                     type: integer
+ *                     example: 0
  *               nombre:
  *                 type: string
  *                 example: "paquete"
@@ -135,7 +161,7 @@ router.get('/:id', obtenerPaquete);
  *                 example: "transporte"
  *               precio:
  *                 type: number
- *                 example: "00.00"
+ *                 example: 00.00
  *     responses:
  *       201:
  *         description: Paquete creado
@@ -156,7 +182,7 @@ router.get('/:id', obtenerPaquete);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.post('/', insertarPaquete);
+router.post("/", insertarPaquete);
 
 /**
  * @swagger
@@ -178,12 +204,18 @@ router.post('/', insertarPaquete);
  *           schema:
  *             type: object
  *             properties:
- *               idCategoria:
- *                 type: integer
- *                 example: "0"
- *               idHospedaje:
- *                 type: integer
- *                 example: "0"
+ *               categoria:
+ *                 type: object
+ *                 properties:
+ *                   idCategoria:
+ *                     type: integer
+ *                     example: 0
+ *               hospedaje:
+ *                 type: object
+ *                 properties:
+ *                   idHospedaje:
+ *                     type: integer
+ *                     example: 0
  *               nombre:
  *                 type: string
  *                 example: "paquete"
@@ -192,7 +224,7 @@ router.post('/', insertarPaquete);
  *                 example: "transporte"
  *               precio:
  *                 type: number
- *                 example: "00.00"
+ *                 example: 00.00
  *     responses:
  *       200:
  *         description: Paquete actualizado
@@ -219,7 +251,7 @@ router.post('/', insertarPaquete);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.put('/:id', modificarPaquete);
+router.put("/:id", modificarPaquete);
 
 /**
  * @swagger
@@ -254,6 +286,6 @@ router.put('/:id', modificarPaquete);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.patch('/:id', eliminarPaquete);
+router.delete("/:id", eliminarPaquete);
 
 export default router;

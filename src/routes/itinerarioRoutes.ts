@@ -1,5 +1,11 @@
-import express from 'express';
-import { eliminarItinerario, modificarItinerario, listarItinerarios, insertarItinerario, obtenerItinerario } from '../controllers/itinerarioController';
+import express from "express";
+import {
+  eliminarItinerario,
+  modificarItinerario,
+  listarItinerarios,
+  insertarItinerario,
+  obtenerItinerario,
+} from "../controllers/itinerarioController";
 
 const router = express.Router();
 
@@ -49,10 +55,14 @@ const router = express.Router();
  *           description: Día del itinerario
  *         horaInicio:
  *           type: string
+ *           format: time
  *           description: Hora de inicio del itinerario
+ *           example: "08:00:00"
  *         horaFin:
  *           type: string
+ *           format: time
  *           description: Hora de fin del itinerario
+ *           example: "17:00:00"
  *         actividad:
  *           type: string
  *           description: Actividad del itinerario
@@ -86,7 +96,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.get('/', listarItinerarios);
+router.get("/", listarItinerarios);
 
 /**
  * @swagger
@@ -111,7 +121,7 @@ router.get('/', listarItinerarios);
  *       404:
  *         description: Itinerario no encontrado
  */
-router.get('/:id', obtenerItinerario);
+router.get("/:id", obtenerItinerario);
 
 /**
  * @swagger
@@ -126,24 +136,29 @@ router.get('/:id', obtenerItinerario);
  *           schema:
  *             type: object
  *             properties:
- *               idViaje:
- *                 type: integer
- *                 example: "0"
+ *               viaje:
+ *                 type: object
+ *                 properties:
+ *                   idViaje:
+ *                     type: integer
+ *                     example: 0
  *               dia:
  *                 type: string
- *                 example: "dia"
+ *                 example: "lunes"
  *               horaInicio:
  *                 type: string
- *                 example: "horaInicio"
+ *                 format: time
+ *                 example: "08:00:00"
  *               horaFin:
  *                 type: string
- *                 example: "horaFin"
+ *                 format: time
+ *                 example: "17:00:00"
  *               actividad:
  *                 type: string
  *                 example: "actividad"
- *               dscripcion:
+ *               descripcion:
  *                 type: string
- *                 example: "dscripcion"
+ *                 example: "descripcion"
  *     responses:
  *       201:
  *         description: Itinerario creado
@@ -164,7 +179,7 @@ router.get('/:id', obtenerItinerario);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.post('/', insertarItinerario);
+router.post("/", insertarItinerario);
 
 /**
  * @swagger
@@ -186,24 +201,29 @@ router.post('/', insertarItinerario);
  *           schema:
  *             type: object
  *             properties:
- *               idViaje:
- *                 type: integer
- *                 example: "0"
+ *               viaje:
+ *                 type: object
+ *                 properties:
+ *                   idViaje:
+ *                     type: integer
+ *                     example: 0
  *               dia:
  *                 type: string
- *                 example: "dia"
+ *                 example: "lunes"
  *               horaInicio:
  *                 type: string
- *                 example: "horaInicio"
+ *                 format: time
+ *                 example: "08:00:00"
  *               horaFin:
  *                 type: string
- *                 example: "horaFin"
+ *                 format: time
+ *                 example: "17:00:00"
  *               actividad:
  *                 type: string
  *                 example: "actividad"
- *               dscripcion:
+ *               descripcion:
  *                 type: string
- *                 example: "dscripcion"
+ *                 example: "descripcion"
  *     responses:
  *       200:
  *         description: Itinerario actualizado
@@ -230,7 +250,7 @@ router.post('/', insertarItinerario);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.put('/:id', modificarItinerario);
+router.put("/:id", modificarItinerario);
 
 /**
  * @swagger
@@ -265,6 +285,6 @@ router.put('/:id', modificarItinerario);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.patch('/:id', eliminarItinerario);
+router.delete("/:id", eliminarItinerario);
 
 export default router;

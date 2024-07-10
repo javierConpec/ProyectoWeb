@@ -1,11 +1,11 @@
-import express from 'express';
+import express from "express";
 import {
-    eliminarRol,
-    modificarRol,
-    listarRoles,
-    insertarRol,
-    obtenerRol
-} from '../controllers/rolController';
+  eliminarRol,
+  modificarRol,
+  listarRoles,
+  insertarRol,
+  obtenerRol,
+} from "../controllers/rolController";
 
 const router = express.Router();
 
@@ -73,7 +73,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.get('/', listarRoles);
+router.get("/", listarRoles);
 
 /**
  * @swagger
@@ -98,7 +98,7 @@ router.get('/', listarRoles);
  *       404:
  *         description: Rol no encontrado
  */
-router.get('/:id', obtenerRol);
+router.get("/:id", obtenerRol);
 
 /**
  * @swagger
@@ -115,7 +115,7 @@ router.get('/:id', obtenerRol);
  *             properties:
  *               nombre:
  *                 type: string
- *                 example: "rol"
+ *                 example: "newrol"
  *     responses:
  *       201:
  *         description: Rol creado
@@ -136,7 +136,7 @@ router.get('/:id', obtenerRol);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.post('/', insertarRol);
+router.post("/", insertarRol);
 
 /**
  * @swagger
@@ -187,7 +187,7 @@ router.post('/', insertarRol);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.put('/:id', modificarRol);
+router.put("/:id", modificarRol);
 
 /**
  * @swagger
@@ -222,6 +222,6 @@ router.put('/:id', modificarRol);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.patch('/:id', eliminarRol);
+router.patch("/:id", eliminarRol);
 
 export default router;

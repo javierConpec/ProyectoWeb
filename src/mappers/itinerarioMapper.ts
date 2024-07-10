@@ -15,12 +15,11 @@ export const fromPrismaItinerario = (itinerario: itinerarios_, viaje:viajes, des
 });
 
 export const toPrismaItinerario = (itinerario: IItinerario):any=> ({
-    i_itinerario: itinerario.idItinerario,
     id_viaje:itinerario.viaje.idViaje,
     dia:itinerario.dia,
     hora_inicio: itinerario.horaInicio,
     hora_fin:itinerario.horaFin,
     actividad:itinerario.actividad,
-    descripcion:itinerario.dscripcion
+    descripcion:itinerario.descripcion
     
 })

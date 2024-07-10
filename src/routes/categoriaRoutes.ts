@@ -1,5 +1,11 @@
-import { eliminarCategoria, modificarCategoria, listarCategorias, insertarCategoria, obtenerCategoria } from "../controllers/categoriaController";
-import express from 'express'
+import {
+  eliminarCategoria,
+  modificarCategoria,
+  listarCategorias,
+  insertarCategoria,
+  obtenerCategoria,
+} from "../controllers/categoriaController";
+import express from "express";
 
 const router = express.Router();
 
@@ -67,7 +73,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.get('/', listarCategorias);
+router.get("/", listarCategorias);
 
 /**
  * @swagger
@@ -92,7 +98,7 @@ router.get('/', listarCategorias);
  *       404:
  *         description: Categoría no encontrada
  */
-router.get('/:id', obtenerCategoria);
+router.get("/:id", obtenerCategoria);
 
 /**
  * @swagger
@@ -109,7 +115,7 @@ router.get('/:id', obtenerCategoria);
  *             properties:
  *               nombre:
  *                 type: string
- *                 example: "categoria"
+ *                 example: "newcategoria"
  *     responses:
  *       200:
  *         description: La categoría fue creada exitosamente
@@ -124,8 +130,7 @@ router.get('/:id', obtenerCategoria);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.post('/', insertarCategoria);
-
+router.post("/", insertarCategoria);
 
 /**
  * @swagger
@@ -170,7 +175,7 @@ router.post('/', insertarCategoria);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.put('/:id', modificarCategoria);
+router.put("/:id", modificarCategoria);
 
 /**
  * @swagger
@@ -205,6 +210,6 @@ router.put('/:id', modificarCategoria);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.patch('/:id', eliminarCategoria);
+router.patch("/:id", eliminarCategoria);
 
 export default router;

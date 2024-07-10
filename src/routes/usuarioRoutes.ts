@@ -1,5 +1,11 @@
-import express from 'express';
-import { eliminarUsuario, insertarUsuario, listarUsuarios, modificarUsuario, obtenerUsuario } from '../controllers/usuarioController';
+import express from "express";
+import {
+  eliminarUsuario,
+  insertarUsuario,
+  listarUsuarios,
+  modificarUsuario,
+  obtenerUsuario,
+} from "../controllers/usuarioController";
 
 const router = express.Router();
 
@@ -94,7 +100,7 @@ const router = express.Router();
  *       500:
  *         description: Error interno del servidor
  */
-router.get('/', listarUsuarios);
+router.get("/", listarUsuarios);
 
 /**
  * @swagger
@@ -125,7 +131,7 @@ router.get('/', listarUsuarios);
  *       500:
  *         description: Error interno del servidor
  */
-router.get('/:id', obtenerUsuario);
+router.get("/:id", obtenerUsuario);
 
 /**
  * @swagger
@@ -140,6 +146,12 @@ router.get('/:id', obtenerUsuario);
  *           schema:
  *             type: object
  *             properties:
+ *               rol:
+ *                 type: object
+ *                 properties:
+ *                   idRol:
+ *                     type: integer
+ *                     example: 0
  *               nombres:
  *                 type: string
  *                 example: "nombre"
@@ -187,7 +199,7 @@ router.get('/:id', obtenerUsuario);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.post('/', insertarUsuario);
+router.post("/", insertarUsuario);
 
 /**
  * @swagger
@@ -207,7 +219,41 @@ router.post('/', insertarUsuario);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Usuario'
+ *             type: object
+ *             properties:
+ *               rol:
+ *                 type: object
+ *                 properties:
+ *                   idRol:
+ *                     type: integer
+ *                     example: 0
+ *               nombres:
+ *                 type: string
+ *                 example: "nombre"
+ *               apellidoPaterno:
+ *                 type: string
+ *                 example: "apellidoP"
+ *               apellidoMaterno:
+ *                 type: string
+ *                 example: "apellidoM"
+ *               username:
+ *                 type: string
+ *                 example: "username"
+ *               email:
+ *                 type: string
+ *                 example: "email"
+ *               clave:
+ *                 type: string
+ *                 example: "clave"
+ *               telefono:
+ *                 type: string
+ *                 example: "telefono"
+ *               direccion:
+ *                 type: string
+ *                 example: "direccion"
+ *               sexo:
+ *                 type: string
+ *                 example: "sexo"
  *     responses:
  *       200:
  *         description: Usuario actualizado
@@ -234,7 +280,7 @@ router.post('/', insertarUsuario);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.put('/:id', modificarUsuario);
+router.put("/:id", modificarUsuario);
 
 /**
  * @swagger
@@ -269,6 +315,6 @@ router.put('/:id', modificarUsuario);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.patch('/:id', eliminarUsuario);
+router.patch("/:id", eliminarUsuario);
 
 export default router;

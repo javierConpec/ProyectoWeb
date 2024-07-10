@@ -1,11 +1,11 @@
-import express from 'express';
+import express from "express";
 import {
-    eliminarPais,
-    modificarPais,
-    listarPaises,
-    insertarPais,
-    obtenerPais
-} from '../controllers/paisController';
+  eliminarPais,
+  modificarPais,
+  listarPaises,
+  insertarPais,
+  obtenerPais,
+} from "../controllers/paisController";
 
 const router = express.Router();
 
@@ -73,7 +73,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.get('/', listarPaises);
+router.get("/", listarPaises);
 
 /**
  * @swagger
@@ -98,7 +98,7 @@ router.get('/', listarPaises);
  *       404:
  *         description: País no encontrado
  */
-router.get('/:id', obtenerPais);
+router.get("/:id", obtenerPais);
 
 /**
  * @swagger
@@ -115,7 +115,7 @@ router.get('/:id', obtenerPais);
  *             properties:
  *               nombre:
  *                 type: string
- *                 example: "pais"
+ *                 example: "newpais"
  *     responses:
  *       201:
  *         description: País creado
@@ -136,7 +136,7 @@ router.get('/:id', obtenerPais);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.post('/', insertarPais);
+router.post("/", insertarPais);
 
 /**
  * @swagger
@@ -187,7 +187,7 @@ router.post('/', insertarPais);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.put('/:id', modificarPais);
+router.put("/:id", modificarPais);
 
 /**
  * @swagger
@@ -222,6 +222,6 @@ router.put('/:id', modificarPais);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.patch('/:id', eliminarPais);
+router.patch("/:id", eliminarPais);
 
 export default router;

@@ -1,11 +1,11 @@
-import express from 'express';
+import express from "express";
 import {
-    eliminarHospedaje,
-    insertarHospedaje,
-    obtenerHospedaje,
-    modifiicarHospedaje,
-    listarHospedajes
-} from '../controllers/hospedajeContoller';
+  eliminarHospedaje,
+  insertarHospedaje,
+  obtenerHospedaje,
+  modifiicarHospedaje,
+  listarHospedajes,
+} from "../controllers/hospedajeContoller";
 
 const router = express.Router();
 
@@ -79,7 +79,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.get('/', listarHospedajes);
+router.get("/", listarHospedajes);
 
 /**
  * @swagger
@@ -104,7 +104,7 @@ router.get('/', listarHospedajes);
  *       404:
  *         description: Hospedaje no encontrado
  */
-router.get('/:id', obtenerHospedaje);
+router.get("/:id", obtenerHospedaje);
 
 /**
  * @swagger
@@ -117,7 +117,20 @@ router.get('/:id', obtenerHospedaje);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Hospedaje'
+ *             type: object
+ *             properties:
+ *               destino:
+ *                 type: object
+ *                 properties:
+ *                   idDestino:
+ *                     type: integer
+ *                     example: 0
+ *               nombre:
+ *                 type: string
+ *                 example: "nuevoHospedaje"
+ *               precio:
+ *                 type: number
+ *                 example: 00.00
  *     responses:
  *       201:
  *         description: Hospedaje creado
@@ -138,7 +151,7 @@ router.get('/:id', obtenerHospedaje);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.post('/', insertarHospedaje);
+router.post("/", insertarHospedaje);
 
 /**
  * @swagger
@@ -158,7 +171,20 @@ router.post('/', insertarHospedaje);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Hospedaje'
+ *             type: object
+ *             properties:
+ *               destino:
+ *                 type: object
+ *                 properties:
+ *                   idDestino:
+ *                     type: integer
+ *                     example: 0
+ *               nombre:
+ *                 type: string
+ *                 example: "nuevoHospedaje"
+ *               precio:
+ *                 type: number
+ *                 example: 00.00
  *     responses:
  *       200:
  *         description: Hospedaje actualizado
@@ -185,7 +211,7 @@ router.post('/', insertarHospedaje);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.put('/:id', modifiicarHospedaje);
+router.put("/:id", modifiicarHospedaje);
 
 /**
  * @swagger
@@ -220,6 +246,6 @@ router.put('/:id', modifiicarHospedaje);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.patch('/:id', eliminarHospedaje);
+router.patch("/:id", eliminarHospedaje);
 
 export default router;

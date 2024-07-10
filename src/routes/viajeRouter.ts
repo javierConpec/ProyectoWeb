@@ -1,5 +1,11 @@
-import express from 'express';
-import { eliminarViaje, modificarViaje, listarViaje, insertarViaje, obtenerViaje } from '../controllers/viajeContoller';
+import express from "express";
+import {
+  eliminarViaje,
+  modificarViaje,
+  listarViaje,
+  insertarViaje,
+  obtenerViaje,
+} from "../controllers/viajeContoller";
 
 const router = express.Router();
 
@@ -89,7 +95,7 @@ const router = express.Router();
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.get('/', listarViaje);
+router.get("/", listarViaje);
 
 /**
  * @swagger
@@ -114,7 +120,7 @@ router.get('/', listarViaje);
  *       404:
  *         description: Viaje no encontrado
  */
-router.get('/:id', obtenerViaje);
+router.get("/:id", obtenerViaje);
 
 /**
  * @swagger
@@ -129,27 +135,29 @@ router.get('/:id', obtenerViaje);
  *           schema:
  *             type: object
  *             properties:
- *               idCategoria:
- *                 type: integer
- *                 example: "0"
- *               idDestino:
- *                 type: integer
- *                 example: "0"
- *               idHospedaje:
- *                 type: string
- *                 example: "paquete"
- *               idPaquete:
- *                 type: string
- *                 example: "paquete"
+ *               destino:
+ *                 type: object
+ *                 properties:
+ *                   idDestino:
+ *                     type: integer
+ *                     example: 0
+ *               paquete:
+ *                 type: object
+ *                 properties:
+ *                   idPaquete:
+ *                     type: integer
+ *                     example: 0
  *               fechaInicio:
- *                 type: date
- *                 example: "10/09/1002"
+ *                 type: string
+ *                 format: date-time
+ *                 example: "2024-08-01T00:00:00Z"
  *               fechaFin:
- *                 type: date
- *                 example: "10/10/1002"
+ *                 type: string
+ *                 format: date-time
+ *                 example: "2024-08-07T23:59:59Z"
  *               tarifa:
  *                 type: number
- *                 example: "00.00"
+ *                 example: 0.00
  *     responses:
  *       201:
  *         description: Viaje creado
@@ -170,7 +178,7 @@ router.get('/:id', obtenerViaje);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.post('/', insertarViaje);
+router.post("/", insertarViaje);
 
 /**
  * @swagger
@@ -192,27 +200,29 @@ router.post('/', insertarViaje);
  *           schema:
  *             type: object
  *             properties:
- *               idCategoria:
- *                 type: integer
- *                 example: "0"
- *               idDestino:
- *                 type: integer
- *                 example: "0"
- *               idHospedaje:
- *                 type: string
- *                 example: "paquete"
- *               idPaquete:
- *                 type: string
- *                 example: "paquete"
+ *               destino:
+ *                 type: object
+ *                 properties:
+ *                   idDestino:
+ *                     type: integer
+ *                     example: 0
+ *               paquete:
+ *                 type: object
+ *                 properties:
+ *                   idPaquete:
+ *                     type: integer
+ *                     example: 0
  *               fechaInicio:
- *                 type: date
- *                 example: "10/09/1002"
+ *                 type: string
+ *                 format: date-time
+ *                 example: "2024-08-01T00:00:00Z"
  *               fechaFin:
- *                 type: date
- *                 example: "10/10/1002"
+ *                 type: string
+ *                 format: date-time
+ *                 example: "2024-08-07T23:59:59Z"
  *               tarifa:
  *                 type: number
- *                 example: "00.00"
+ *                 example: 0.00
  *     responses:
  *       200:
  *         description: Viaje actualizado
@@ -239,7 +249,7 @@ router.post('/', insertarViaje);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.put('/:id', modificarViaje);
+router.put("/:id", modificarViaje);
 
 /**
  * @swagger
@@ -274,6 +284,6 @@ router.put('/:id', modificarViaje);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.patch('/:id', eliminarViaje);
+router.patch("/:id", eliminarViaje);
 
 export default router;

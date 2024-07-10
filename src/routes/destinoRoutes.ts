@@ -1,5 +1,11 @@
-import express from 'express';
-import { eliminarDestino, insertarDestino, listarDestinos, modificarDestino, obtenerDestino } from '../controllers/destinoController';
+import express from "express";
+import {
+  eliminarDestino,
+  insertarDestino,
+  listarDestinos,
+  modificarDestino,
+  obtenerDestino,
+} from "../controllers/destinoController";
 
 const router = express.Router();
 
@@ -72,7 +78,7 @@ const router = express.Router();
  *       500:
  *         description: Error interno del servidor
  */
-router.get('/', listarDestinos);
+router.get("/", listarDestinos);
 
 /**
  * @swagger
@@ -103,7 +109,7 @@ router.get('/', listarDestinos);
  *       500:
  *         description: Error interno del servidor
  */
-router.get('/:id', obtenerDestino);
+router.get("/:id", obtenerDestino);
 
 /**
  * @swagger
@@ -118,12 +124,15 @@ router.get('/:id', obtenerDestino);
  *           schema:
  *             type: object
  *             properties:
- *               idPais:
- *                 type: integer
- *                 example: "0"
+ *               pais:
+ *                 type: object
+ *                 properties:
+ *                   idPais:
+ *                     type: integer
+ *                     example: 2
  *               nombre:
  *                 type: string
- *                 example: "destino"
+ *                 example: "ola"
  *     responses:
  *       201:
  *         description: Destino creado
@@ -144,7 +153,7 @@ router.get('/:id', obtenerDestino);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.post('/', insertarDestino);
+router.post("/", insertarDestino);
 
 /**
  * @swagger
@@ -164,7 +173,17 @@ router.post('/', insertarDestino);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Destino'
+ *             type: object
+ *             properties:
+ *               pais:
+ *                 type: object
+ *                 properties:
+ *                   idPais:
+ *                     type: integer
+ *                     example: 2
+ *               nombre:
+ *                 type: string
+ *                 example: "ola"
  *     responses:
  *       200:
  *         description: Destino actualizado
@@ -198,7 +217,7 @@ router.post('/', insertarDestino);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.put('/:id', modificarDestino);
+router.put("/:id", modificarDestino);
 
 /**
  * @swagger
@@ -233,6 +252,6 @@ router.put('/:id', modificarDestino);
  *             schema:
  *               $ref: '#/components/schemas/ResponseModel'
  */
-router.patch('/:id', eliminarDestino);
+router.patch("/:id", eliminarDestino);
 
 export default router;
