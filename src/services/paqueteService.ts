@@ -31,7 +31,13 @@ export const listarPaquetes = async () => {
         }
     });
     console.log('paqueteService::paquetes', paquetes);
-    return paquetes.map((paquete: any) => fromPrismaPaquete(paquete, paquete.categorias, paquete.hospedajes, paquete.hospedajes.destinos, paquete.hospedajes.destinos.paises));
+    return paquetes.map((paquete: any) => fromPrismaPaquete(
+        paquete, 
+        paquete.categorias, 
+        paquete.hospedajes, 
+        paquete.hospedajes.destinos, 
+        paquete.hospedajes.destinos.paises
+    ));
 }
 
 export const obtenerPaquete = async (idPaquete: number) => {

@@ -14,6 +14,7 @@ export const fromPrismaPaquete = (paquete: paquetes, categoria:categorias,hosped
 });
 
 export const toPrismaPaquete = (paquete: IPaquete):any=> ({
+    id_paquete: paquete.idPaquete,
     id_categoria:paquete.categoria.idCategoria,
     id_hospedaje:paquete.hospedaje.idHospedaje,
     nombre: paquete.nombre,

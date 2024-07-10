@@ -1,4 +1,3 @@
-
 import { IViaje } from "./Viaje";
 export interface IItinerario{
     idItinerario:number,
@@ -7,7 +6,7 @@ export interface IItinerario{
     horaInicio:string,
     horaFin:string,
     actividad:string
-    descripcion:string,
+    dscripcion:string,
     estadoAuditoria:string;
     fechaCreacion: Date;
     fechaModificacion: Date;

@@ -13,7 +13,6 @@ export const insertarViaje = async (viaje: IViaje) => {
 };
 
 export const listarViajes = async () => {
-    try {
         const viajes: viajes[] = await prisma.viajes.findMany({
             include: {
                 destinos:{
@@ -42,15 +41,11 @@ export const listarViajes = async () => {
             viaje.destinos,
             viaje.destinos.paises
         ));
-    } catch (error) {
-        console.error('Error al listar viajes:', error);
-       
-    }
 }
 
 export const obtenerViaje = async (idViaje: number) => {
     console.log('viajeService::obtenerViaje', idViaje);
-
+    
     const viaje: any = await prisma.viajes.findUnique({
         where: {
             id_viaje: idViaje
@@ -61,21 +56,30 @@ export const obtenerViaje = async (idViaje: number) => {
                     paises: true
                 }
             },
-            paquetes: true
+            paquetes: {
+                include: {
+                    categorias: true,
+                    hospedajes: {
+                        include: {
+                            destinos: {
+                                include: {
+                                    paises: true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     });
-
-    if (!viaje) {
-        throw new Error(`No se encontró el viaje con ID ${idViaje}`);
-    }
 
     return fromPrismaViaje(
         viaje,
         viaje.paquetes,
-        viaje.categorias,
-        viaje.hospedajes,
-        viaje.hospedajes.destinos,
-        viaje.hospedajes.destinos?.paises
+        viaje.paquetes.categorias,
+        viaje.paquetes.hospedajes,
+        viaje.destinos,
+        viaje.destinos.paises
     );
 }
 

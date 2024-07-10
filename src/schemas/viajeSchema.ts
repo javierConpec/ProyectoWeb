@@ -1,10 +1,10 @@
 import Joi from 'joi';
 
 const viajeBaseSchema = {
-    fechaInicio: Joi.string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/), // Acepta fechas en formato YYYY-MM-DD
-    fechaFin: Joi.string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/),
+    fechaInicio: Joi.date()
+    .iso(),
+    fechaFin: Joi.date()
+    .iso(),
     tarifa: Joi.number()
     .precision(2)
     .strict(),

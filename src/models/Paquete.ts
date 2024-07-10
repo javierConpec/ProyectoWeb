@@ -1,4 +1,3 @@
-
 import {ICategoria} from './Categoria'
 import {IHospedaje} from './Hospedaje'
 export interface IPaquete{

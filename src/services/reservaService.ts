@@ -15,15 +15,43 @@ export const insertarResrva = async (reserva: IReserva) => {
 export const listarResrvas = async () => {
     const reserva: reservas[] = await prisma.reservas.findMany({
         include: {
-            viajes: true,
-            usuarios:true
+            viajes: {
+                include: {
+                    destinos: {
+                        include: {
+                            paises: true
+                        }
+                    },
+                    paquetes: {
+                        include: {
+                            hospedajes: true,
+                            categorias: true
+                        }
+                    }
+                }
+            },
+            usuarios:{
+                include:{
+                    roles:true
+                }
+            }
         },
         where: {
             estado_auditoria: '1'
         }
     });
     console.log('reservaController::listarReservas', reserva);
-    return reserva.map((reserva: any) => fromPrismaReserva(reserva,reserva.viajes, reserva.viajes.destinos, reserva.viajes.hospedajes, reserva.viajes.categorias, reserva.viajes.paquete, reserva.viajes.paises,reserva.usuarios, reserva.usuarios.roles));
+    return reserva.map((reserva: any) => fromPrismaReserva(
+        reserva,
+        reserva.usuarios, 
+        reserva.usuarios.roles,
+        reserva.viajes,
+        reserva.viajes.paquetes,
+        reserva.viajes.destinos.paises,
+        reserva.viajes.paquetes.categorias,
+        reserva.viajes.destinos,
+        reserva.viajes.paquetes.hospedajes
+        ));
 }
 
 export const obtenerReserva = async (idReserva: number) => {
@@ -34,12 +62,38 @@ export const obtenerReserva = async (idReserva: number) => {
             id_reserva: idReserva
         },
         include: {
-            viajes: true,
-            usuarios:true
-            
-        }
+            viajes: {
+                include: {
+                    destinos: {
+                        include: {
+                            paises: true
+                        }
+                    },
+                    paquetes: {
+                        include: {
+                            hospedajes: true,
+                            categorias: true
+                        }
+                    }
+                }
+            },
+            usuarios:{
+                include:{
+                    roles:true
+                }
+            }
+        },
+        
     });
-    return fromPrismaReserva(reserva,reserva.viajes, reserva.viajes.destinos, reserva.viajes.hospedajes, reserva.viajes.categorias, reserva.viajes.paquete, reserva.viajes.paises,reserva.usuarios, reserva.usuarios.roles);
+    return fromPrismaReserva(reserva,
+        reserva.usuarios, 
+        reserva.usuarios.roles,
+        reserva.viajes,
+        reserva.viajes.paquetes,
+        reserva.viajes.destinos.paises,
+        reserva.viajes.paquetes.categorias,
+        reserva.viajes.destinos,
+        reserva.viajes.paquetes.hospedajes);
 }
 
 export const modificarReserva = async (idReserva: number, reserva: IReserva) => {
