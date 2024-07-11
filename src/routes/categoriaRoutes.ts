@@ -67,11 +67,8 @@ const router = express.Router();
  *     tags: [Categorias]
  *     responses:
  *       200:
- *         description: Lista de categorías
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Categorias Listados
+ *  
  */
 router.get("/", listarCategorias);
 
@@ -90,13 +87,7 @@ router.get("/", listarCategorias);
  *         description: ID de la categoría
  *     responses:
  *       200:
- *         description: Una categoría
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Categoría no encontrada
+ *         description: Categoria listada
  */
 router.get("/:id", obtenerCategoria);
 
@@ -118,17 +109,13 @@ router.get("/:id", obtenerCategoria);
  *                 example: "newcategoria"
  *     responses:
  *       200:
- *         description: La categoría fue creada exitosamente
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Categoria creado
+
+ *       400:
+ *         description: Datos inválidos
+
  *       500:
- *         description: Error al crear la categoría
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Error interno del servidor
  */
 router.post("/", insertarCategoria);
 
@@ -157,23 +144,13 @@ router.post("/", insertarCategoria);
  *                 example: "categoria"
  *     responses:
  *       200:
- *         description: La categoría fue actualizada exitosamente
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Categoría no encontrada
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Categoria modificada
+
+ *       400:
+ *         description: Datos inválidos
+
  *       500:
- *         description: Error al actualizar la categoría
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Error interno del servidor
  */
 router.put("/:id", modificarCategoria);
 
@@ -192,23 +169,7 @@ router.put("/:id", modificarCategoria);
  *         description: ID de la categoría
  *     responses:
  *       200:
- *         description: La categoría fue eliminada exitosamente
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Categoría no encontrada
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       500:
- *         description: Error al eliminar la categoría
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Categoria eliminada
  */
 router.patch("/:id", eliminarCategoria);
 

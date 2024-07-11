@@ -98,11 +98,7 @@ const router = express.Router();
  *     tags: [Reservas]
  *     responses:
  *       200:
- *         description: Lista de reservas
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Reserva creada
  */
 router.get("/", listarReservas);
 
@@ -121,11 +117,7 @@ router.get("/", listarReservas);
  *         description: ID de la reserva
  *     responses:
  *       200:
- *         description: Detalles de la reserva
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: País creado
  *       404:
  *         description: Reserva no encontrada
  */
@@ -144,24 +136,12 @@ router.get("/:id", obtenerResrva);
  *           schema:
  *             $ref: '#/components/schemas/Reserva'
  *     responses:
- *       201:
+ *       200:
  *         description: Reserva creada
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.post("/", insertarReserva);
 
@@ -186,29 +166,11 @@ router.post("/", insertarReserva);
  *             $ref: '#/components/schemas/Reserva'
  *     responses:
  *       200:
- *         description: Reserva actualizada
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Resrva modificada
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Reserva no encontrada
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.put("/:id", modificarReserva);
 
@@ -228,22 +190,6 @@ router.put("/:id", modificarReserva);
  *     responses:
  *       200:
  *         description: Reserva eliminada
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Reserva no encontrada
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       500:
- *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.delete("/:id", eliminarReserva);
 

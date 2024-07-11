@@ -89,11 +89,7 @@ const router = express.Router();
  *     tags: [Viajes]
  *     responses:
  *       200:
- *         description: Lista de viajes
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Lista de Viajes
  */
 router.get("/", listarViaje);
 
@@ -112,12 +108,8 @@ router.get("/", listarViaje);
  *         description: ID del viaje
  *     responses:
  *       200:
- *         description: Detalles del viaje
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
+ *         description: Viaje Obtenido
+ *       404: 
  *         description: Viaje no encontrado
  */
 router.get("/:id", obtenerViaje);
@@ -159,24 +151,12 @@ router.get("/:id", obtenerViaje);
  *                 type: number
  *                 example: 0.00
  *     responses:
- *       201:
+ *       200:
  *         description: Viaje creado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.post("/", insertarViaje);
 
@@ -223,31 +203,13 @@ router.post("/", insertarViaje);
  *               tarifa:
  *                 type: number
  *                 example: 0.00
- *     responses:
+  *     responses:
  *       200:
- *         description: Viaje actualizado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Viaje modificado
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Viaje no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.put("/:id", modificarViaje);
 
@@ -267,22 +229,6 @@ router.put("/:id", modificarViaje);
  *     responses:
  *       200:
  *         description: Viaje eliminado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Viaje no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       500:
- *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.patch("/:id", eliminarViaje);
 

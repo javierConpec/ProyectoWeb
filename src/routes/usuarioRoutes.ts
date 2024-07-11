@@ -32,8 +32,6 @@ const router = express.Router();
  *         status:
  *           type: integer
  *           description: Código de estado HTTP
- *         data:
- *           $ref: '#/components/schemas/Usuario'
  *     Usuario:
  *       type: object
  *       properties:
@@ -92,13 +90,7 @@ const router = express.Router();
  *     tags: [Usuarios]
  *     responses:
  *       200:
- *         description: Lista de usuarios
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       500:
- *         description: Error interno del servidor
+ *         description: Lista de Usuarios
  */
 router.get("/", listarUsuarios);
 
@@ -117,19 +109,9 @@ router.get("/", listarUsuarios);
  *         description: ID del usuario
  *     responses:
  *       200:
- *         description: Detalles del usuario
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: País creado
  *       404:
- *         description: Usuario no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       500:
- *         description: Error interno del servidor
+ *         description:Usuario no obtenido
  */
 router.get("/:id", obtenerUsuario);
 
@@ -180,24 +162,12 @@ router.get("/:id", obtenerUsuario);
  *                 type: string
  *                 example: "sexo"
  *     responses:
- *       201:
+ *       200:
  *         description: Usuario creado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.post("/", insertarUsuario);
 
@@ -254,31 +224,13 @@ router.post("/", insertarUsuario);
  *               sexo:
  *                 type: string
  *                 example: "sexo"
- *     responses:
+  *     responses:
  *       200:
- *         description: Usuario actualizado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Usuario modificado
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Usuario no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.put("/:id", modificarUsuario);
 
@@ -298,22 +250,6 @@ router.put("/:id", modificarUsuario);
  *     responses:
  *       200:
  *         description: Usuario eliminado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Usuario no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       500:
- *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.patch("/:id", eliminarUsuario);
 

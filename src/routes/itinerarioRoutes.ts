@@ -91,10 +91,6 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: Lista de itinerarios
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.get("/", listarItinerarios);
 
@@ -113,11 +109,7 @@ router.get("/", listarItinerarios);
  *         description: ID del itinerario
  *     responses:
  *       200:
- *         description: Detalles del itinerario
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Itinerario obtenido
  *       404:
  *         description: Itinerario no encontrado
  */
@@ -160,24 +152,12 @@ router.get("/:id", obtenerItinerario);
  *                 type: string
  *                 example: "descripcion"
  *     responses:
- *       201:
+ *       200:
  *         description: Itinerario creado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.post("/", insertarItinerario);
 
@@ -227,28 +207,10 @@ router.post("/", insertarItinerario);
  *     responses:
  *       200:
  *         description: Itinerario actualizado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Itinerario no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.put("/:id", modificarItinerario);
 
@@ -270,20 +232,6 @@ router.put("/:id", modificarItinerario);
  *         description: Itinerario eliminado
  *         content:
  *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Itinerario no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       500:
- *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.delete("/:id", eliminarItinerario);
 

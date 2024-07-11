@@ -95,11 +95,7 @@ const router = express.Router();
  *     tags: [Paquetes]
  *     responses:
  *       200:
- *         description: Lista de paquetes
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Listado de Paquetes
  */
 router.get("/", listarPaquetes);
 
@@ -118,11 +114,7 @@ router.get("/", listarPaquetes);
  *         description: ID del paquete
  *     responses:
  *       200:
- *         description: Detalles del paquete
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Paquete obtenido
  *       404:
  *         description: Paquete no encontrado
  */
@@ -163,24 +155,12 @@ router.get("/:id", obtenerPaquete);
  *                 type: number
  *                 example: 00.00
  *     responses:
- *       201:
+ *       200:
  *         description: Paquete creado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.post("/", insertarPaquete);
 
@@ -227,29 +207,11 @@ router.post("/", insertarPaquete);
  *                 example: 00.00
  *     responses:
  *       200:
- *         description: Paquete actualizado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Paquete modificado
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Paquete no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.put("/:id", modificarPaquete);
 
@@ -269,22 +231,6 @@ router.put("/:id", modificarPaquete);
  *     responses:
  *       200:
  *         description: Paquete eliminado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Paquete no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       500:
- *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.delete("/:id", eliminarPaquete);
 

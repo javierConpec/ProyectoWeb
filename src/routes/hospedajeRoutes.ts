@@ -32,8 +32,6 @@ const router = express.Router();
  *         status:
  *           type: integer
  *           description: Código de estado HTTP
- *         data:
- *           $ref: '#/components/schemas/Hospedaje'
  *     Hospedaje:
  *       type: object
  *       required:
@@ -74,10 +72,6 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: Lista de hospedajes
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.get("/", listarHospedajes);
 
@@ -96,11 +90,9 @@ router.get("/", listarHospedajes);
  *         description: ID del hospedaje
  *     responses:
  *       200:
- *         description: Detalles del hospedaje
+ *         description: hospedaje obtenido
  *         content:
  *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       404:
  *         description: Hospedaje no encontrado
  */
@@ -132,24 +124,12 @@ router.get("/:id", obtenerHospedaje);
  *                 type: number
  *                 example: 00.00
  *     responses:
- *       201:
+ *       200:
  *         description: Hospedaje creado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.post("/", insertarHospedaje);
 
@@ -188,28 +168,10 @@ router.post("/", insertarHospedaje);
  *     responses:
  *       200:
  *         description: Hospedaje actualizado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Hospedaje no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.put("/:id", modifiicarHospedaje);
 
@@ -229,22 +191,6 @@ router.put("/:id", modifiicarHospedaje);
  *     responses:
  *       200:
  *         description: Hospedaje eliminado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Hospedaje no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       500:
- *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.patch("/:id", eliminarHospedaje);
 

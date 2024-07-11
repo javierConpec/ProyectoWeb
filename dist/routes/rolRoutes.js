@@ -63,10 +63,6 @@ const router = express_1.default.Router();
  *     responses:
  *       200:
  *         description: Lista de roles
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.get("/", rolController_1.listarRoles);
 /**
@@ -84,11 +80,7 @@ router.get("/", rolController_1.listarRoles);
  *         description: ID del rol
  *     responses:
  *       200:
- *         description: Detalles del rol
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: País creado
  *       404:
  *         description: Rol no encontrado
  */
@@ -110,24 +102,12 @@ router.get("/:id", rolController_1.obtenerRol);
  *                 type: string
  *                 example: "newrol"
  *     responses:
- *       201:
+ *       200:
  *         description: Rol creado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.post("/", rolController_1.insertarRol);
 /**
@@ -155,29 +135,11 @@ router.post("/", rolController_1.insertarRol);
  *                 example: "rol"
  *     responses:
  *       200:
- *         description: Rol actualizado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Rol modificado
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Rol no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.put("/:id", rolController_1.modificarRol);
 /**
@@ -195,23 +157,7 @@ router.put("/:id", rolController_1.modificarRol);
  *         description: ID del rol
  *     responses:
  *       200:
- *         description: Rol eliminado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: Rol no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       500:
- *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Rol eliminada
  */
 router.patch("/:id", rolController_1.eliminarRol);
 exports.default = router;

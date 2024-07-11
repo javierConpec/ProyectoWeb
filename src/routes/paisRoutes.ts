@@ -67,11 +67,7 @@ const router = express.Router();
  *     tags: [Paises]
  *     responses:
  *       200:
- *         description: Lista de países
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: Lista de Paises
  */
 router.get("/", listarPaises);
 
@@ -90,13 +86,9 @@ router.get("/", listarPaises);
  *         description: ID del país
  *     responses:
  *       200:
- *         description: Detalles del país
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
+ *         description: País creado
  *       404:
- *         description: País no encontrado
+ *         description: Pais no encontrado
  */
 router.get("/:id", obtenerPais);
 
@@ -119,22 +111,10 @@ router.get("/:id", obtenerPais);
  *     responses:
  *       201:
  *         description: País creado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.post("/", insertarPais);
 
@@ -164,28 +144,10 @@ router.post("/", insertarPais);
  *     responses:
  *       200:
  *         description: País actualizado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       400:
  *         description: Datos inválidos
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: País no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  *       500:
  *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.put("/:id", modificarPais);
 
@@ -205,22 +167,6 @@ router.put("/:id", modificarPais);
  *     responses:
  *       200:
  *         description: País eliminado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       404:
- *         description: País no encontrado
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
- *       500:
- *         description: Error interno del servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ResponseModel'
  */
 router.patch("/:id", eliminarPais);
 
