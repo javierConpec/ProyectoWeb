@@ -8,8 +8,8 @@ const destinoBaseSchema = {
         idPais: Joi.number()
             .integer()
             .positive()
-            .required()  // Asegúrate de que el idPais sea requerido y positivo
-    }).required()  // Requerir el objeto pais
+            .required() 
+    })
 };
 
 export const insertarDestinoSchema = Joi.object({
