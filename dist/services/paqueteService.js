@@ -23,22 +23,61 @@ const insertarPaquete = (paquete) => __awaiter(void 0, void 0, void 0, function*
 exports.insertarPaquete = insertarPaquete;
 const listarPaquetes = () => __awaiter(void 0, void 0, void 0, function* () {
     const paquetes = yield prisma.paquetes.findMany({
+<<<<<<< HEAD
+=======
+        include: {
+            categorias: true,
+            hospedajes: {
+                include: {
+                    destinos: {
+                        include: {
+                            paises: true
+                        }
+                    }
+                }
+            }
+        },
+>>>>>>> 5defce0d6e2b28971e3feb4dab058f66c7d23044
         where: {
             estado_auditoria: '1'
         }
     });
+<<<<<<< HEAD
     return paquetes.map((paquete) => (0, paqueteMapper_1.fromPrismaPaquete)(paquete));
+=======
+    console.log('paqueteService::paquetes', paquetes);
+    return paquetes.map((paquete) => (0, paqueteMapper_1.fromPrismaPaquete)(paquete, paquete.categorias, paquete.hospedajes, paquete.hospedajes.destinos, paquete.hospedajes.destinos.paises));
+>>>>>>> 5defce0d6e2b28971e3feb4dab058f66c7d23044
 });
 exports.listarPaquetes = listarPaquetes;
 const obtenerPaquete = (idPaquete) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('paqueteService::obtenerPaquete', idPaquete);
     const paquete = yield prisma.paquetes.findUnique({
         where: {
+<<<<<<< HEAD
             id_paquete: idPaquete,
             estado_auditoria: '1'
         }
     });
     return (0, paqueteMapper_1.fromPrismaPaquete)(paquete);
+=======
+            id_paquete: idPaquete
+        },
+        include: {
+            categorias: true,
+            hospedajes: {
+                include: {
+                    destinos: {
+                        include: {
+                            paises: true
+                        }
+                    }
+                }
+            }
+        }
+    });
+    return (0, paqueteMapper_1.fromPrismaPaquete)(paquete, paquete.categorias, paquete.hospedajes, paquete.hospedajes.destinos, paquete.hospedajes.destinos.paises);
+>>>>>>> 5defce0d6e2b28971e3feb4dab058f66c7d23044
 });
 exports.obtenerPaquete = obtenerPaquete;
 const modificarPaquete = (idPaquete, paquete) => __awaiter(void 0, void 0, void 0, function* () {
